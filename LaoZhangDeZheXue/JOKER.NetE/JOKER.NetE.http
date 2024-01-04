@@ -1,0 +1,6 @@
+@JOKER.NetE_HostAddress = http://localhost:5163
+
+GET {{JOKER.NetE_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
