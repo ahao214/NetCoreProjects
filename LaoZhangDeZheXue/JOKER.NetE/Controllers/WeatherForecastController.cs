@@ -1,3 +1,5 @@
+using JOKER.NetE.Model;
+using JOKER.NetE.Service;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JOKER.NetE.Controllers
@@ -18,16 +20,12 @@ namespace JOKER.NetE.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet(Name = "GetUserList")]
+        public async Task<List<UserView>> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            var userService = new UserService();
+            var userList = await userService.Query();
+            return userList;
         }
     }
 }

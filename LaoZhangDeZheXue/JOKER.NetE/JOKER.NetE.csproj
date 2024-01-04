@@ -11,4 +11,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\JOKER.NetE.Service\JOKER.NetE.Service.csproj" />
+  </ItemGroup>
+
 </Project>
