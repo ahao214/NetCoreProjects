@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOKER.NetE", "..\LaoZhangDe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Laozhang", "Laozhang", "{C0BE8942-6725-4701-9463-BBB3F8C06D53}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOKER.NetE.Common", "..\LaoZhangDeZheXue\JOKER.NetE.Common\JOKER.NetE.Common.csproj", "{85D48980-2A4D-41FF-B1D3-6AD9F0FB68A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +19,17 @@ Global
 		{E57F313F-AA50-4374-97B6-6938BB7F13A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E57F313F-AA50-4374-97B6-6938BB7F13A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E57F313F-AA50-4374-97B6-6938BB7F13A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85D48980-2A4D-41FF-B1D3-6AD9F0FB68A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85D48980-2A4D-41FF-B1D3-6AD9F0FB68A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85D48980-2A4D-41FF-B1D3-6AD9F0FB68A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85D48980-2A4D-41FF-B1D3-6AD9F0FB68A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E57F313F-AA50-4374-97B6-6938BB7F13A5} = {C0BE8942-6725-4701-9463-BBB3F8C06D53}
+		{85D48980-2A4D-41FF-B1D3-6AD9F0FB68A8} = {C0BE8942-6725-4701-9463-BBB3F8C06D53}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42A8C8AD-B81A-4791-A447-F3A021C89436}
