@@ -1,4 +1,7 @@
 
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using JOKER.NetE.Extension;
 using JOKER.NetE.Extensions;
 using JOKER.NetE.IService;
 using JOKER.NetE.Repository.Base;
@@ -11,6 +14,13 @@ namespace JOKER.NetE
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                .ConfigureContainer<ContainerBuilder>(builder =>
+                {
+                    builder.RegisterModule<AutofacModuleRegister>();
+                    builder.RegisterModule<AutofacPropertityModuleReg>();
+                });
+
 
             // Add services to the container.
 
@@ -23,8 +33,8 @@ namespace JOKER.NetE
             AutoMapperConfig.RegisterMappings();
 
             // “¿¿µ◊¢»Î
-            builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
-            builder.Services.AddScoped(typeof(IBaseService<,>), typeof(BaseService<,>));
+            //builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
+            //builder.Services.AddScoped(typeof(IBaseService<,>), typeof(BaseService<,>));
 
             var app = builder.Build();
 

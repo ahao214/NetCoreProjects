@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\JOKER.NetE.Extension\JOKER.NetE.Extension.csproj" />
   </ItemGroup>
 
