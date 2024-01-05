@@ -1,5 +1,6 @@
 using AutoMapper;
 using JOKER.NetE.Common;
+using JOKER.NetE.Common.Caches;
 using JOKER.NetE.Common.Core;
 using JOKER.NetE.Common.Option;
 using JOKER.NetE.IService;
@@ -23,12 +24,14 @@ namespace JOKER.NetE.Controllers
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly IBaseService<Role, RoleView> _roleService;
         private readonly IOptions<RedisOptions> _options;
+        private readonly ICaching _caching;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IBaseService<Role, RoleView> roleService, IOptions<RedisOptions> options)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IBaseService<Role, RoleView> roleService, IOptions<RedisOptions> options, ICaching caching)
         {
             _logger = logger;
             _roleService = roleService;
             _options = options;
+            _caching = caching;
         }
 
         [HttpGet(Name = "GetList")]

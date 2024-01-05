@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using JOKER.NetE.Common;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;

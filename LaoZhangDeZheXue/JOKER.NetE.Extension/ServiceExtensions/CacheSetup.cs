@@ -1,4 +1,5 @@
-﻿using JOKER.NetE.Common.Core;
+﻿using JOKER.NetE.Common.Caches;
+using JOKER.NetE.Common.Core;
 using JOKER.NetE.Common.Option;
 using JOKER.NetE.Extension.Redis;
 using Microsoft.Extensions.DependencyInjection;

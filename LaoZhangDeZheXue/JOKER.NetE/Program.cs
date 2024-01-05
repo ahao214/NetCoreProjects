@@ -41,8 +41,11 @@ namespace JOKER.NetE
 
             // ≈‰÷√
             builder.Services.AddSingleton(new AppSettings(builder.Configuration));
-
             builder.Services.AddAllOptionRegister();
+
+            // ª∫¥Ê
+            builder.Services.AddCacheSetup();
+
 
             // “¿¿µ◊¢»Î
             //builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
