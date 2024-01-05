@@ -1,4 +1,5 @@
 using AutoMapper;
+using JOKER.NetE.IService;
 using JOKER.NetE.Model;
 using JOKER.NetE.Service;
 using Microsoft.AspNetCore.Mvc;
@@ -15,12 +16,12 @@ namespace JOKER.NetE.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IMapper _mapper;
+        private readonly IBaseService<Role, RoleView> _roleService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger,IMapper mapper)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IBaseService<Role, RoleView> roleService)
         {
             _logger = logger;
-            _mapper = mapper;
+            _roleService = roleService;
         }
 
         [HttpGet(Name = "GetList")]
@@ -30,8 +31,10 @@ namespace JOKER.NetE.Controllers
             //var userList = await userService.Query();
             //return userList;
             // 实体泛型 视图泛型
-            var roleService = new BaseService<Role, RoleView>(_mapper);
-            var roleList = await roleService.Query();
+            //var roleService = new BaseService<Role, RoleView>(_mapper);
+            //var roleList = await roleService.Query();
+
+            var roleList = await _roleService.Query();
             return roleList;
 
         }

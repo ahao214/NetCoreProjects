@@ -1,5 +1,8 @@
 
 using JOKER.NetE.Extensions;
+using JOKER.NetE.IService;
+using JOKER.NetE.Repository.Base;
+using JOKER.NetE.Service;
 
 namespace JOKER.NetE
 {
@@ -18,6 +21,10 @@ namespace JOKER.NetE
 
             builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
             AutoMapperConfig.RegisterMappings();
+
+            // “¿¿µ◊¢»Î
+            builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
+            builder.Services.AddScoped(typeof(IBaseService<,>), typeof(BaseService<,>));
 
             var app = builder.Build();
 
