@@ -1,4 +1,6 @@
 
+using JOKER.NetE.Extensions;
+
 namespace JOKER.NetE
 {
     public class Program
@@ -13,6 +15,9 @@ namespace JOKER.NetE
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
+            AutoMapperConfig.RegisterMappings();
 
             var app = builder.Build();
 

@@ -4,7 +4,7 @@ namespace JOKER.NetE.IService
 {
     public interface IBaseService<TEntity,TView> where TEntity : class 
     {
-        Task<List<TEntity>> Query();
+        Task<List<TView>> Query();
 
     }
 }
