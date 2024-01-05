@@ -2,6 +2,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using JOKER.NetE.Common;
+using JOKER.NetE.Common.Core;
 using JOKER.NetE.Common.Option;
 using JOKER.NetE.Extension.ServiceExtensions;
 using JOKER.NetE.Extensions;
@@ -26,7 +27,7 @@ namespace JOKER.NetE
                     hostingContext.Configuration.ConfigureApplication();
                 });
 
-
+            builder.ConfigureApplication();
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -48,6 +49,8 @@ namespace JOKER.NetE
             //builder.Services.AddScoped(typeof(IBaseService<,>), typeof(BaseService<,>));
 
             var app = builder.Build();
+            app.ConfigureApplication();
+            app.UseApplicationSetup();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

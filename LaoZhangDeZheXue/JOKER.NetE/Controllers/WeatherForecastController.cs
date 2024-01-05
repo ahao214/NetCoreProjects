@@ -51,6 +51,8 @@ namespace JOKER.NetE.Controllers
             var redisOptions = _options.Value;
             Console.WriteLine(JsonConvert.SerializeObject(redisOptions));
 
+
+
             return roleList;
 
         }

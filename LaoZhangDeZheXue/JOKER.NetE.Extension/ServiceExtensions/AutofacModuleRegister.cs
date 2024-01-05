@@ -19,6 +19,8 @@ namespace JOKER.NetE.Extension.ServiceExtensions
             var aopTypes = new List<Type>() { typeof(ServiceAOP) };
             builder.RegisterType<ServiceAOP>();
 
+
+
             // 注册仓储
             builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerDependency();
 
