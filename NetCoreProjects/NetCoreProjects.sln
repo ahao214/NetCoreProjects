@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOKER.NetE", "..\LaoZhangDeZheXue\JOKER.NetE\JOKER.NetE.csproj", "{E57F313F-AA50-4374-97B6-6938BB7F13A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JOKER.NetE", "..\LaoZhangDeZheXue\JOKER.NetE\JOKER.NetE.csproj", "{E57F313F-AA50-4374-97B6-6938BB7F13A5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Laozhang", "Laozhang", "{C0BE8942-6725-4701-9463-BBB3F8C06D53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOKER.NetE.Common", "..\LaoZhangDeZheXue\JOKER.NetE.Common\JOKER.NetE.Common.csproj", "{85D48980-2A4D-41FF-B1D3-6AD9F0FB68A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JOKER.NetE.Common", "..\LaoZhangDeZheXue\JOKER.NetE.Common\JOKER.NetE.Common.csproj", "{85D48980-2A4D-41FF-B1D3-6AD9F0FB68A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOKER.NetE.Model", "..\LaoZhangDeZheXue\JOKER.NetE.Model\JOKER.NetE.Model.csproj", "{C0DC2C21-D916-4BED-93A3-28B76A7B3A45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JOKER.NetE.Model", "..\LaoZhangDeZheXue\JOKER.NetE.Model\JOKER.NetE.Model.csproj", "{C0DC2C21-D916-4BED-93A3-28B76A7B3A45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOKER.NetE.Repository", "..\LaoZhangDeZheXue\JOKER.NetE.Repository\JOKER.NetE.Repository.csproj", "{BF376781-0888-4E59-8048-EDA8D8359007}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JOKER.NetE.Repository", "..\LaoZhangDeZheXue\JOKER.NetE.Repository\JOKER.NetE.Repository.csproj", "{BF376781-0888-4E59-8048-EDA8D8359007}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOKER.NetE.IService", "..\LaoZhangDeZheXue\JOKER.NetE.IService\JOKER.NetE.IService.csproj", "{CAF972D6-0278-440A-B643-8CABDBFF0DBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JOKER.NetE.IService", "..\LaoZhangDeZheXue\JOKER.NetE.IService\JOKER.NetE.IService.csproj", "{CAF972D6-0278-440A-B643-8CABDBFF0DBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOKER.NetE.Service", "..\LaoZhangDeZheXue\JOKER.NetE.Service\JOKER.NetE.Service.csproj", "{6C2BC74F-8AB7-42B2-8AC3-208917787E50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JOKER.NetE.Service", "..\LaoZhangDeZheXue\JOKER.NetE.Service\JOKER.NetE.Service.csproj", "{6C2BC74F-8AB7-42B2-8AC3-208917787E50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOKER.NetE.Extension", "..\LaoZhangDeZheXue\JOKER.NetE.Extension\JOKER.NetE.Extension.csproj", "{306A3CC5-446D-4425-B055-C42595440A12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{6C2BC74F-8AB7-42B2-8AC3-208917787E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C2BC74F-8AB7-42B2-8AC3-208917787E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C2BC74F-8AB7-42B2-8AC3-208917787E50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{306A3CC5-446D-4425-B055-C42595440A12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{306A3CC5-446D-4425-B055-C42595440A12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{306A3CC5-446D-4425-B055-C42595440A12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{306A3CC5-446D-4425-B055-C42595440A12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{BF376781-0888-4E59-8048-EDA8D8359007} = {C0BE8942-6725-4701-9463-BBB3F8C06D53}
 		{CAF972D6-0278-440A-B643-8CABDBFF0DBE} = {C0BE8942-6725-4701-9463-BBB3F8C06D53}
 		{6C2BC74F-8AB7-42B2-8AC3-208917787E50} = {C0BE8942-6725-4701-9463-BBB3F8C06D53}
+		{306A3CC5-446D-4425-B055-C42595440A12} = {C0BE8942-6725-4701-9463-BBB3F8C06D53}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42A8C8AD-B81A-4791-A447-F3A021C89436}
