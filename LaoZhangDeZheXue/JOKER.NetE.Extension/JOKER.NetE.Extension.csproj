@@ -15,4 +15,8 @@
     <ProjectReference Include="..\JOKER.NetE.Service\JOKER.NetE.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Option\" />
+  </ItemGroup>
+
 </Project>

@@ -2,7 +2,8 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using JOKER.NetE.Common;
-using JOKER.NetE.Extension;
+using JOKER.NetE.Common.Option;
+using JOKER.NetE.Extension.ServiceExtensions;
 using JOKER.NetE.Extensions;
 using JOKER.NetE.IService;
 using JOKER.NetE.Repository.Base;
@@ -20,6 +21,9 @@ namespace JOKER.NetE
                 {
                     builder.RegisterModule<AutofacModuleRegister>();
                     builder.RegisterModule<AutofacPropertityModuleReg>();
+                }).ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    hostingContext.Configuration.ConfigureApplication();
                 });
 
 
@@ -36,6 +40,8 @@ namespace JOKER.NetE
 
             // ≈‰÷√
             builder.Services.AddSingleton(new AppSettings(builder.Configuration));
+
+            builder.Services.AddAllOptionRegister();
 
             // “¿¿µ◊¢»Î
             //builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));

@@ -1,14 +1,9 @@
 ﻿using Castle.DynamicProxy;
 using JOKER.NetE.Common;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace JOKER.NetE.Extension
+namespace JOKER.NetE.Extension.ServiceExtensions
 {
     /// <summary>
     /// 拦截器AOP 继承IInterceptor接口

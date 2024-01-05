@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using JOKER.NetE.Model;
 
-namespace JOKER.NetE.Extensions
+namespace JOKER.NetE.Extension.ServiceExtensions
 {
-    public class CustomProfile:Profile
+    public class CustomProfile : Profile
     {
         /// <summary>
         /// 构造函数，用来创建关系映射

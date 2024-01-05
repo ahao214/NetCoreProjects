@@ -5,7 +5,7 @@ using JOKER.NetE.Repository.Base;
 using JOKER.NetE.Service;
 using System.Reflection;
 
-namespace JOKER.NetE.Extension
+namespace JOKER.NetE.Extension.ServiceExtensions
 {
     public class AutofacModuleRegister : Autofac.Module
     {
@@ -23,7 +23,7 @@ namespace JOKER.NetE.Extension
             builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerDependency();
 
             // 注册服务
-            builder.RegisterGeneric(typeof(BaseService<,>)).As(typeof(IBaseService<,>)).InstancePerDependency().EnableInterfaceInterceptors().InterceptedBy(aopTypes.ToArray()); 
+            builder.RegisterGeneric(typeof(BaseService<,>)).As(typeof(IBaseService<,>)).InstancePerDependency().EnableInterfaceInterceptors().InterceptedBy(aopTypes.ToArray());
 
 
             // 获取Service.dll 程序集服务，并注册

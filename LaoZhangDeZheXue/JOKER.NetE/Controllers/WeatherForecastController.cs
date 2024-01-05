@@ -1,9 +1,12 @@
 using AutoMapper;
 using JOKER.NetE.Common;
+using JOKER.NetE.Common.Option;
 using JOKER.NetE.IService;
 using JOKER.NetE.Model;
 using JOKER.NetE.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace JOKER.NetE.Controllers
 {
@@ -18,11 +21,13 @@ namespace JOKER.NetE.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly IBaseService<Role, RoleView> _roleService;
+        private readonly IOptions<RedisOptions> _options;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IBaseService<Role, RoleView> roleService)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IBaseService<Role, RoleView> roleService, IOptions<RedisOptions> options)
         {
             _logger = logger;
             _roleService = roleService;
+            _options = options;
         }
 
         [HttpGet(Name = "GetList")]
@@ -42,6 +47,9 @@ namespace JOKER.NetE.Controllers
             // 获取appsettings.json 里面的拿到 ConnectionString 参数的内容
             var redisConnectionString = AppSettings.GetValue("Redis:ConnectionString");
             Console.WriteLine($"Enable:{redisEnable},ConnectionString:{redisConnectionString}");
+
+            var redisOptions = _options.Value;
+            Console.WriteLine(JsonConvert.SerializeObject(redisOptions));
 
             return roleList;
 
