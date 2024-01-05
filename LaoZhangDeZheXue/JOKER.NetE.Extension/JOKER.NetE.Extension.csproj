@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JOKER.NetE.Common\JOKER.NetE.Common.csproj" />
     <ProjectReference Include="..\JOKER.NetE.Service\JOKER.NetE.Service.csproj" />
   </ItemGroup>
 

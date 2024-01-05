@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JOKER.NetE.Service", "..\La
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JOKER.NetE.Extension", "..\LaoZhangDeZheXue\JOKER.NetE.Extension\JOKER.NetE.Extension.csproj", "{306A3CC5-446D-4425-B055-C42595440A12}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TPLMS", "TPLMS", "{ED7967D8-58DE-4ABD-BC8F-C692357EC9A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EShop", "EShop", "{51DD1DD1-B925-43EE-A7C2-0DB735C3D63F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

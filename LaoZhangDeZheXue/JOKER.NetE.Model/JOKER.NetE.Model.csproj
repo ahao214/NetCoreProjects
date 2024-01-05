@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JOKER.NetE.Common\JOKER.NetE.Common.csproj" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.130" />
   </ItemGroup>
 
 </Project>
