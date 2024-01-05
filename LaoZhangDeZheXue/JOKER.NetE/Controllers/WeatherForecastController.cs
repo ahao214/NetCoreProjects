@@ -1,5 +1,6 @@
 using AutoMapper;
 using JOKER.NetE.Common;
+using JOKER.NetE.Common.Core;
 using JOKER.NetE.Common.Option;
 using JOKER.NetE.IService;
 using JOKER.NetE.Model;
@@ -51,7 +52,9 @@ namespace JOKER.NetE.Controllers
             var redisOptions = _options.Value;
             Console.WriteLine(JsonConvert.SerializeObject(redisOptions));
 
-
+            var roleServiceObjNew = App.GetService<IBaseService<Role, RoleView>>(false);
+            var roleList2 = await roleServiceObjNew.Query();
+            var redisOptions2 = App.GetOptions<RedisOptions>();
 
             return roleList;
 
