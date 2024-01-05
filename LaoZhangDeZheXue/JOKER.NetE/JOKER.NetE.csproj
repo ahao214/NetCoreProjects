@@ -12,7 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JOKER.NetE.Service\JOKER.NetE.Service.csproj" />
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JOKER.NetE.Extension\JOKER.NetE.Extension.csproj" />
   </ItemGroup>
 
 </Project>

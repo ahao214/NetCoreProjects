@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿
+
+using AutoMapper;
 
 namespace JOKER.NetE.Extensions
 {

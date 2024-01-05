@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\JOKER.NetE.Service\JOKER.NetE.Service.csproj" />
+  </ItemGroup>
+
 </Project>
