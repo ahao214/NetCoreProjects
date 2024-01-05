@@ -1,6 +1,7 @@
 
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using JOKER.NetE.Common;
 using JOKER.NetE.Extension;
 using JOKER.NetE.Extensions;
 using JOKER.NetE.IService;
@@ -31,6 +32,10 @@ namespace JOKER.NetE
 
             builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
             AutoMapperConfig.RegisterMappings();
+
+
+            // ≈‰÷√
+            builder.Services.AddSingleton(new AppSettings(builder.Configuration));
 
             // “¿¿µ◊¢»Î
             //builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));

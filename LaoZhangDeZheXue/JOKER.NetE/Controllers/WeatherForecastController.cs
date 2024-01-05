@@ -1,4 +1,5 @@
 using AutoMapper;
+using JOKER.NetE.Common;
 using JOKER.NetE.IService;
 using JOKER.NetE.Model;
 using JOKER.NetE.Service;
@@ -35,6 +36,13 @@ namespace JOKER.NetE.Controllers
             //var roleList = await roleService.Query();
 
             var roleList = await _roleService.Query();
+            // 获取appsettings.json 里面的拿到Enable参数的内容
+            var redisEnable = AppSettings.app(new string[] { "Redis", "Enable" });
+
+            // 获取appsettings.json 里面的拿到 ConnectionString 参数的内容
+            var redisConnectionString = AppSettings.GetValue("Redis:ConnectionString");
+            Console.WriteLine($"Enable:{redisEnable},ConnectionString:{redisConnectionString}");
+
             return roleList;
 
         }
