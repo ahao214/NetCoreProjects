@@ -46,6 +46,8 @@ namespace JOKER.NetE
             // ª∫¥Ê
             builder.Services.AddCacheSetup();
 
+            // ORM
+            builder.Services.AddSqlsugarSetup();
 
             // “¿¿µ◊¢»Î
             //builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));

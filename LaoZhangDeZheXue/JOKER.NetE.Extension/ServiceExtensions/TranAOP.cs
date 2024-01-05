@@ -1,4 +1,5 @@
 ﻿using Castle.DynamicProxy;
+using JOKER.NetE.Repository.UnitOfWorks;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;

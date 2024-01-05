@@ -1,12 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using SqlSugar;
-using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace JOKER.NetE.Repository.UnitOfWorks
 {
@@ -60,15 +56,15 @@ namespace JOKER.NetE.Repository.UnitOfWorks
             }
         }
 
-        public void BeginTran(MethodInfo method)
-        {
-            lock (this)
-            {
-                GetDbClient().BeginTran();
-                TranStack.Push(method.GetFullName());
-                _tranCount = TranStack.Count;
-            }
-        }
+        //public void BeginTran(MethodInfo method)
+        //{
+        //    lock (this)
+        //    {
+        //        GetDbClient().BeginTran();
+        //        TranStack.Push(method.GetFullName());
+        //        _tranCount = TranStack.Count;
+        //    }
+        //}
 
         public void CommitTran()
         {
@@ -90,44 +86,44 @@ namespace JOKER.NetE.Repository.UnitOfWorks
             }
         }
 
-        public void CommitTran(MethodInfo method)
-        {
-            lock (this)
-            {
-                string result = "";
-                while (!TranStack.IsEmpty && !TranStack.TryPeek(out result))
-                {
-                    Thread.Sleep(1);
-                }
+        //public void CommitTran(MethodInfo method)
+        //{
+        //    lock (this)
+        //    {
+        //        string result = "";
+        //        while (!TranStack.IsEmpty && !TranStack.TryPeek(out result))
+        //        {
+        //            Thread.Sleep(1);
+        //        }
 
 
-                if (result == method.GetFullName())
-                {
-                    try
-                    {
-                        GetDbClient().CommitTran();
+        //        if (result == method.GetFullName())
+        //        {
+        //            try
+        //            {
+        //                GetDbClient().CommitTran();
 
-                        _logger.LogDebug($"Commit Transaction");
-                        Console.WriteLine($"Commit Transaction");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                        GetDbClient().RollbackTran();
-                        _logger.LogDebug($"Commit Error , Rollback Transaction");
-                    }
-                    finally
-                    {
-                        while (!TranStack.TryPop(out _))
-                        {
-                            Thread.Sleep(1);
-                        }
+        //                _logger.LogDebug($"Commit Transaction");
+        //                Console.WriteLine($"Commit Transaction");
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                Console.WriteLine(ex.Message);
+        //                GetDbClient().RollbackTran();
+        //                _logger.LogDebug($"Commit Error , Rollback Transaction");
+        //            }
+        //            finally
+        //            {
+        //                while (!TranStack.TryPop(out _))
+        //                {
+        //                    Thread.Sleep(1);
+        //                }
 
-                        _tranCount = TranStack.Count;
-                    }
-                }
-            }
-        }
+        //                _tranCount = TranStack.Count;
+        //            }
+        //        }
+        //    }
+        //}
 
         public void RollbackTran()
         {
@@ -138,30 +134,30 @@ namespace JOKER.NetE.Repository.UnitOfWorks
             }
         }
 
-        public void RollbackTran(MethodInfo method)
-        {
-            lock (this)
-            {
-                string result = "";
-                while (!TranStack.IsEmpty && !TranStack.TryPeek(out result))
-                {
-                    Thread.Sleep(1);
-                }
+        //public void RollbackTran(MethodInfo method)
+        //{
+        //    lock (this)
+        //    {
+        //        string result = "";
+        //        while (!TranStack.IsEmpty && !TranStack.TryPeek(out result))
+        //        {
+        //            Thread.Sleep(1);
+        //        }
 
-                if (result == method.GetFullName())
-                {
-                    GetDbClient().RollbackTran();
-                    _logger.LogDebug($"Rollback Transaction");
-                    Console.WriteLine($"Rollback Transaction");
-                    while (!TranStack.TryPop(out _))
-                    {
-                        Thread.Sleep(1);
-                    }
+        //        if (result == method.GetFullName())
+        //        {
+        //            GetDbClient().RollbackTran();
+        //            _logger.LogDebug($"Rollback Transaction");
+        //            Console.WriteLine($"Rollback Transaction");
+        //            while (!TranStack.TryPop(out _))
+        //            {
+        //                Thread.Sleep(1);
+        //            }
 
-                    _tranCount = TranStack.Count;
-                }
-            }
-        }
+        //            _tranCount = TranStack.Count;
+        //        }
+        //    }
+        //}
 
     }
 }

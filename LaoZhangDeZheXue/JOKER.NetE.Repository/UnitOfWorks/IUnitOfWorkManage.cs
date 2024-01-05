@@ -1,10 +1,5 @@
 ﻿using SqlSugar;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JOKER.NetE.Repository.UnitOfWorks
 {
@@ -16,11 +11,11 @@ namespace JOKER.NetE.Repository.UnitOfWorks
         UnitOfWork CreateUnitOfWork();
 
         void BeginTran();
-        void BeginTran(MethodInfo method);
+        //void BeginTran(MethodInfo method);
         void CommitTran();
-        void CommitTran(MethodInfo method);
+        //void CommitTran(MethodInfo method);
         void RollbackTran();
-        void RollbackTran(MethodInfo method);
+        //void RollbackTran(MethodInfo method);
 
     }
 }
