@@ -11,11 +11,11 @@ namespace JOKER.NetE.Repository.UnitOfWorks
         UnitOfWork CreateUnitOfWork();
 
         void BeginTran();
-        //void BeginTran(MethodInfo method);
+        void BeginTran(MethodInfo method);
         void CommitTran();
-        //void CommitTran(MethodInfo method);
+        void CommitTran(MethodInfo method);
         void RollbackTran();
-        //void RollbackTran(MethodInfo method);
+        void RollbackTran(MethodInfo method);
 
     }
 }
