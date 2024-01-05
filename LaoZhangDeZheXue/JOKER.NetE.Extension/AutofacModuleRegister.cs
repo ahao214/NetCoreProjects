@@ -1,17 +1,13 @@
 ﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
 using JOKER.NetE.IService;
 using JOKER.NetE.Repository.Base;
 using JOKER.NetE.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JOKER.NetE.Extension
 {
-    public class AutofacModuleRegister:Autofac.Module
+    public class AutofacModuleRegister : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -20,9 +16,14 @@ namespace JOKER.NetE.Extension
             var servicesDllFile = Path.Combine(basePath, "JOKER.NetE.Service.dll");
             var repositoryDllFile = Path.Combine(basePath, "JOKER.NetE.Repository.dll");
 
+            var aopTypes = new List<Type>() { typeof(ServiceAOP) };
+            builder.RegisterType<ServiceAOP>();
 
+            // 注册仓储
             builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerDependency();
-            builder.RegisterGeneric(typeof(BaseService<,>)).As(typeof(IBaseService<,>)).InstancePerDependency();
+
+            // 注册服务
+            builder.RegisterGeneric(typeof(BaseService<,>)).As(typeof(IBaseService<,>)).InstancePerDependency().EnableInterfaceInterceptors().InterceptedBy(aopTypes.ToArray()); 
 
 
             // 获取Service.dll 程序集服务，并注册
@@ -30,7 +31,9 @@ namespace JOKER.NetE.Extension
             builder.RegisterAssemblyTypes(assemblysService)
                 .AsImplementedInterfaces()
                 .InstancePerDependency()
-                .PropertiesAutowired();
+                .PropertiesAutowired()
+                .EnableClassInterceptors()
+                .InterceptedBy(aopTypes.ToArray());
 
             // 获取 Repository.dll 程序集服务，并注册
             var assemblysRepository = Assembly.LoadFrom(repositoryDllFile);
