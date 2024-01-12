@@ -10,7 +10,7 @@ namespace Product.Domain.Entity
     /// <summary>
     /// 商品种类
     /// </summary>
-    public class ProductVariant
+    public class ProductVariant : IAggregateRoot
     {
         public Guid Id { get; init; }
         [JsonIgnore]

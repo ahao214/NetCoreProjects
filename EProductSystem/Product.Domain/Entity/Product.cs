@@ -9,7 +9,7 @@ namespace Product.Domain.Entity
     /// <summary>
     /// 商品
     /// </summary>
-    public class Product
+    public class Product: IAggregateRoot
     {
         public Guid Id { get; init; }
 

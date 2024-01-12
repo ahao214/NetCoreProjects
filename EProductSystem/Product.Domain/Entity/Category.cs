@@ -10,7 +10,7 @@ namespace Product.Domain.Entity
     /// <summary>
     /// 类别
     /// </summary>
-    public class Category
+    public class Category 
     {
         public Guid Id { get; init; }
         public string Name { get; private set; }

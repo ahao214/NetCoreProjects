@@ -9,7 +9,7 @@ namespace Product.Domain.Entity
     /// <summary>
     /// 商品类型
     /// </summary>
-    public class ProductType
+    public class ProductType 
     {
         public Guid Id { get; init; }
         public string Name { get; private set; }   //基础版 Pro版 ProMax版
