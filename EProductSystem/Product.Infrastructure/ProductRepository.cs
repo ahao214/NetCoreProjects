@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Product.Domain;
 using Product.Infrastructure.DBContexts;
 using System.Xml.XPath;
@@ -48,16 +49,23 @@ namespace Product.Infrastructure
 
         }
 
-        public async Task<List<Domain.Entity.Product>> FindProductBySearchAsync(string searchText)
+        private async Task<List<Domain.Entity.Product>> FindProductBySearchOnLinq(string searchText)
         {
             var result = await _dbContext.Products.Where(x => x.Deleted == false && x.Visible == true && x.Title.ToLower().Contains(searchText.ToLower()) || x.Description.ToLower().Contains(searchText.ToLower())).Include(v => v.Variants.Where(x => x.Deleted == false && v.Visible == true)).ToListAsync();
 
             return result;
         }
 
+        public async Task<List<Domain.Entity.Product>> FindProductBySearchAsync(string searchText)
+        {
+            var result = await FindProductBySearchOnLinq(searchText);
+
+            return result;
+        }
+
         public async Task<List<string>> GetProductSearchSuggestionsAsync(string searchText)
         {
-            var products = await FindProductBySearchAsync(searchText);
+            var products = await FindProductBySearchOnLinq(searchText);
             List<string> result = new List<string>();
 
             foreach (var product in products)
@@ -67,12 +75,13 @@ namespace Product.Infrastructure
                     result.Add(product.Title);
                 }
 
-                if(product.Description !=null )
+                if (product.Description != null)
                 {
                     var punctuation = product.Description.Where(char.IsPunctuation).Distinct().ToArray();
                     var words = product.Description.Split().Select(s => s.Trim(punctuation));
-                    foreach (var word in words) { 
-                        if(word.Contains (searchText,StringComparison.OrdinalIgnoreCase) && !result.Contains(word ))
+                    foreach (var word in words)
+                    {
+                        if (word.Contains(searchText, StringComparison.OrdinalIgnoreCase) && !result.Contains(word))
                         {
                             result.Add(word);
                         }
