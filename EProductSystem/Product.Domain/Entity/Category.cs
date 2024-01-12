@@ -10,7 +10,7 @@ namespace Product.Domain.Entity
     /// <summary>
     /// 类别
     /// </summary>
-    public class Category 
+    public class Category
     {
         public Guid Id { get; init; }
         public string Name { get; private set; }
@@ -31,5 +31,37 @@ namespace Product.Domain.Entity
             Visible = visible;
             Deleted = deleted;
         }
+
+        public void CategoryVisible()
+        {
+            if (Visible)
+            {
+                Console.WriteLine("该类别已经可见");
+                return;
+            }
+            this.Visible = true;
+        }
+
+        public void CategoryInVisible()
+        {
+            if (!Visible)
+            {
+                Console.WriteLine("该类别已经不可见");
+                return;
+            }
+            this.Visible = false;
+        }
+
+        public void CategoryDeleted()
+        {
+            if (Deleted)
+            {
+                Console.WriteLine("该类别已删除");
+                return;
+            }
+            this.Visible = false;
+            this.Deleted = true;
+        }
+
     }
 }
