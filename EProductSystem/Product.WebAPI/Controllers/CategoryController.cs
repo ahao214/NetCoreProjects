@@ -18,7 +18,7 @@ namespace Product.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ServiceResponse<List<Category>>> GetCategories()
+        public async Task<ActionResult<ServiceResponse<List<Category>>>> GetCategories()
         {
             var resp = new ServiceResponse<List<Category>>();
             var result = await _categoryRepository.FindAllCategoriesAsync();
@@ -33,7 +33,7 @@ namespace Product.WebAPI.Controllers
                 resp.Data = result;
             }
 
-            return resp;
+            return Ok(resp);
         }
 
 
