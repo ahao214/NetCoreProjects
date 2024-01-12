@@ -9,7 +9,7 @@ namespace Product.Domain.Entity
     /// <summary>
     /// 商品
     /// </summary>
-    public class Product: IAggregateRoot
+    public class Product : IAggregateRoot
     {
         public Guid Id { get; init; }
 
@@ -47,8 +47,80 @@ namespace Product.Domain.Entity
             Featured = featured;
             Visible = visible;
             Deleted = deleted;
-
         }
+
+        public void ActiveFeatured()
+        {
+            if (Featured)
+            {
+                Console.WriteLine("该商品已经是特色商品");
+                return;
+            }
+            this.Featured = true;
+        }
+
+        public void DrambackFeatured()
+        {
+            if (!Featured)
+            {
+                Console.WriteLine("该商品已不是特色商品");
+                return;
+            }
+            this.Featured = false;
+        }
+
+        public void AddVariant(ProductVariant variant)
+        {
+            if (this.Variants.Contains(variant))
+            {
+                Console.WriteLine("该商品已包含套餐");
+                return;
+            }
+            this.Variants.Add(variant);
+        }
+
+        public void RemoveVariant(ProductVariant variant)
+        {
+            if (!this.Variants.Contains(variant))
+            {
+                Console.WriteLine("该商品不包含套餐");
+                return;
+            }
+            this.Variants.Remove(variant);
+        }
+
+        public void ProductVisible()
+        {
+            if (Visible)
+            {
+                Console.WriteLine("该商品已是可见状态");
+                return;
+            }
+            this.Visible = true;
+        }
+
+        public void ProductInVisible()
+        {
+            if (!Visible)
+            {
+                Console.WriteLine("该商品已是不可见状态");
+                return;
+            }
+            this.Visible = false;
+        }
+
+        public void ProductDeleted()
+        {
+            if (Deleted)
+            {
+                Console.WriteLine("该商品已删除");
+                return;
+            }
+            this.Visible = false;
+            this.Deleted = true;
+        }
+
+
 
     }
 }
