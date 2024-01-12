@@ -29,6 +29,16 @@ builder.Services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
+// ≈‰÷√øÁ”Ú
+builder.Services.AddCors(opt =>
+{
+    opt.AddDefaultPolicy(bui =>
+    {
+        bui.WithOrigins(new string[] { "http://localhost:8080" })
+        .AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+    });
+});
+
 
 var app = builder.Build();
 
@@ -38,6 +48,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//  π”√øÁ”Ú
+app.UseCors();
 
 app.UseHttpsRedirection();
 
