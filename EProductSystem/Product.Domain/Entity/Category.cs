@@ -12,11 +12,11 @@ namespace Product.Domain.Entity
     /// </summary>
     public class Category
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Url { get; set; }
-        public bool Visible { get; set; }
-        public bool Deleted { get; set; }
+        public Guid Id { get; init; }
+        public string Name { get; private set; }
+        public string Url { get; private set; }
+        public bool Visible { get; private set; }
+        public bool Deleted { get; private set; }
 
         public Category()
         {
