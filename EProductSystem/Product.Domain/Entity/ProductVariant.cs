@@ -40,5 +40,47 @@ namespace Product.Domain.Entity
             Deleted = deleted;
         }
 
+
+        public void UpdateType(ProductType type)
+        {
+            if (type.Name == ProductType.Name)
+            {
+                Console.WriteLine("已经存在套餐");
+                return;
+            }
+            ProductType = type;
+        }
+
+        public void VariantVisible()
+        {
+            if (Visible)
+            {
+                Console.WriteLine("该变体已经是可见状态");
+                return;
+            }
+            this.Visible = true;
+        }
+
+        public void VariantInVisible()
+        {
+            if (!Visible)
+            {
+                Console.WriteLine("该变体已经是不可见状态");
+                return;
+            }
+            this.Visible = false;
+        }
+
+        public void ProductDelete()
+        {
+            if (Deleted)
+            {
+                Console.WriteLine("该套餐已删除");
+                return;
+            }
+            this.Visible = false;
+            this.Deleted = true;
+        }
+
     }
 }
