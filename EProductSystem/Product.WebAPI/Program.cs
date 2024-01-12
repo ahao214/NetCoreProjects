@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Product.Domain;
+using Product.Infrastructure;
 using Product.Infrastructure.Configs;
 using Product.Infrastructure.DBContexts;
 
@@ -16,9 +18,17 @@ builder.Services.AddSwaggerGen();
 //    opt.UseNpgsql(builder.Configuration.GetSection("ConnStr").Value);
 //});
 
-builder.Services.AddDbContext<ProductDbContext>(options => {
+builder.Services.AddDbContext<ProductDbContext>(options =>
+{
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+// ×¢Èë²Ö´¢²ã
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+
 
 var app = builder.Build();
 
