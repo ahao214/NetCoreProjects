@@ -34,7 +34,7 @@ builder.Services.AddCors(opt =>
 {
     opt.AddDefaultPolicy(bui =>
     {
-        bui.WithOrigins(new string[] { "http://localhost:8080" })
+        bui.WithOrigins(new string[] { "http://localhost:5000" })
         .AllowAnyMethod().AllowAnyHeader().AllowCredentials();
     });
 });
