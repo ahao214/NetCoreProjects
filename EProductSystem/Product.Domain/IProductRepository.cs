@@ -21,25 +21,25 @@ namespace Product.Domain
         /// </summary>
         /// <param name="ProductId"></param>
         /// <returns></returns>
-        Task<Entity.Product> FindProductByIdAsync(Guid ProductId);
+        Task<Entity.Product> FindProductByIdAsync(Guid productId);
         /// <summary>
-        /// 根据类别ID查询商品
+        /// 根据类别查询商品
         /// </summary>
-        /// <param name="categoryId"></param>
+        /// <param name="categoryUrl"></param>
         /// <returns></returns>
-        Task<List<Entity.Product>> FindProductByCategoryAsync(string categoryId);
+        Task<List<Entity.Product>> FindProductByCategoryAsync(string categoryUrl);
         /// <summary>
         /// 根据内容查询商品
         /// </summary>
         /// <param name="searchText"></param>
         /// <returns></returns>
-        Task<Entity.Product> FindProductBySearchAsync(string searchText);
+        Task<List<Entity.Product>> FindProductBySearchAsync(string searchText);
         /// <summary>
         /// 
         /// </summary>
         /// <param name="searchText"></param>
         /// <returns></returns>
-        Task<List<Entity.Product>> GetProductSearchSuggestionsAsync(string searchText);
+        Task<List<string>> GetProductSearchSuggestionsAsync(string searchText);
         /// <summary>
         /// 根据商品种类查询商品
         /// </summary>
