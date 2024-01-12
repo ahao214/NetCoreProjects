@@ -1,5 +1,7 @@
-﻿using Product.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using Product.Domain;
 using Product.Domain.Entity;
+using Product.Infrastructure.DBContexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +15,30 @@ namespace Product.Infrastructure
     /// </summary>
     public class ProductTypeRepository : IProductTypeRepository
     {
-        public Task<List<ProductType>> FindAllProductTypeAsync()
+        private readonly ProductDbContext _dbContext;
+
+        public ProductTypeRepository(ProductDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<List<ProductType>> GetProductTypeByProductIdAsync(Guid ProductId)
+        public async Task<List<ProductType>> FindAllProductTypeAsync()
         {
-            throw new NotImplementedException();
+            return await _dbContext.ProductTypes.ToListAsync();
+        }
+
+        public async Task<List<ProductType>> GetProductTypeByProductIdAsync(Guid ProductId)
+        {
+            List<ProductType> productTypes = new List<ProductType>();
+            var result = await _dbContext.ProductVariants.Where(x => x.Deleted == false && x.Visible == true && x.ProductId == ProductId).ToListAsync();
+
+            foreach (var item in result)
+            {
+                var type = await _dbContext.ProductTypes.SingleOrDefaultAsync(x => x.Id == item.ProductTypeId);
+                productTypes.Add(type);
+            }
+
+            return productTypes;
         }
     }
 }
