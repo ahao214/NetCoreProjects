@@ -22,5 +22,7 @@ namespace Product.Infrastructure.DBContexts
             modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
         }
 
+      
+
     }
 }

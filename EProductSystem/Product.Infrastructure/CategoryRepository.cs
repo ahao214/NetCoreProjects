@@ -23,7 +23,9 @@ namespace Product.Infrastructure
         }
         public async Task<List<Category>> FindAllCategoriesAsync()
         {
-            var result = await _dbContext.Categories.Where(x => x.Deleted == false && x.Visible == true).ToListAsync();
+            //var result = await _dbContext.Categories.Where(x => x.Deleted == false && x.Visible == true).ToListAsync();
+            var result = await _dbContext.Categories.ToListAsync();
+
             return result;
         }
     }
