@@ -30,14 +30,14 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 
 // ÅäÖÃ¿çÓò
-//builder.Services.AddCors(opt =>
-//{
-//    opt.AddDefaultPolicy(bui =>
-//    {
-//        bui.WithOrigins(new string[] { "http://localhost:5000" })
-//        .AllowAnyMethod().AllowAnyHeader().AllowCredentials();
-//    });
-//});
+builder.Services.AddCors(opt =>
+{
+    opt.AddDefaultPolicy(bui =>
+    {
+        bui.WithOrigins(new string[] { "http://localhost:5000" })
+        .AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+    });
+});
 
 
 var app = builder.Build();
