@@ -65,6 +65,22 @@ namespace Product.WebAPI.Controllers
             return Ok(resp);
         }
 
+        [HttpGet("{searchText}/{page}")]
+        public async Task<ActionResult<ServiceResponse<List<Domain.Entity.Product>>>> GetProductBySearch(string searchText, int page = 1)
+        {
+            var result = await _productRepository.FindProductBySearchAsync(searchText, page);
+            var resp = new ServiceResponse<ProductSearchResponse>()
+            {
+                Data = new ProductSearchResponse
+                {
+                    Products = result.Item1,
+                    CurrentPage = page,
+                    Pages = (int)result.Item2
+                }
+            };
+            return Ok(resp);
+        }
+
 
         [HttpGet("{searchText}")]
         public async Task<ActionResult<ServiceResponse<List<Domain.Entity.Product>>>> GetProductBySearch(string searchText)

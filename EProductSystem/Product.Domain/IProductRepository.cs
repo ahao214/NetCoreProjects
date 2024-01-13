@@ -28,12 +28,15 @@ namespace Product.Domain
         /// <param name="categoryUrl"></param>
         /// <returns></returns>
         Task<List<Entity.Product>> FindProductByCategoryAsync(string categoryUrl);
+        
         /// <summary>
         /// 根据内容查询商品
         /// </summary>
         /// <param name="searchText"></param>
         /// <returns></returns>
         Task<List<Entity.Product>> FindProductBySearchAsync(string searchText);
+
+        Task<(List<Entity.Product>, double)> FindProductBySearchAsync(string searchText, int page);
         /// <summary>
         /// 
         /// </summary>

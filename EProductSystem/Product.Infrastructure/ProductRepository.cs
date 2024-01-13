@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Product.Domain;
 using Product.Infrastructure.DBContexts;
-using System.Xml.XPath;
 
 namespace Product.Infrastructure
 {
@@ -20,21 +18,26 @@ namespace Product.Infrastructure
 
         public async Task<List<Domain.Entity.Product>> FindAllProductAsync()
         {
-            var result = await _dbContext.Products.Include(p => p.Variants.Where(x => x.Deleted == false && x.Visible == true)).Where(x => x.Deleted == false && x.Visible == true).ToListAsync();
+            //var result = await _dbContext.Products.Include(p => p.Variants.Where(x => x.Deleted == false && x.Visible == true)).Where(x => x.Deleted == false && x.Visible == true).ToListAsync();
+
+            var result = await _dbContext.Products.Include(p => p.Variants).ToListAsync();
 
             return result;
         }
 
         public async Task<List<Domain.Entity.Product>> FindProductByCategoryAsync(string categoryUrl)
         {
-            var result = await _dbContext.Products.Where(x => x.Deleted == false && x.Visible == true && x.Category.Url.ToLower().Equals(categoryUrl.ToLower())).Include(v => v.Variants.Where(x => x.Deleted == false && x.Visible == true)).ToListAsync();
+            //var result = await _dbContext.Products.Where(x => x.Deleted == false && x.Visible == true && x.Category.Url.ToLower().Equals(categoryUrl.ToLower())).Include(v => v.Variants.Where(x => x.Deleted == false && x.Visible == true)).ToListAsync();
 
+            var result = await _dbContext.Products.Where(x => x.Category.Url.ToLower().Equals(categoryUrl.ToLower())).Include(v => v.Variants).ToListAsync();
             return result;
         }
 
         public async Task<Domain.Entity.Product> FindProductByIdAsync(Guid productId)
         {
-            var result = await _dbContext.Products.Include(x => x.Variants.Where(x => x.Deleted == false && x.Visible == true)).ThenInclude(x => x.ProductType).SingleOrDefaultAsync(x => x.Id == productId && x.Deleted == false && x.Visible == true);
+            //var result = await _dbContext.Products.Include(x => x.Variants.Where(x => x.Deleted == false && x.Visible == true)).ThenInclude(x => x.ProductType).SingleOrDefaultAsync(x => x.Id == productId && x.Deleted == false && x.Visible == true);
+
+            var result = await _dbContext.Products.Include(x => x.Variants).ThenInclude(x => x.ProductType).SingleOrDefaultAsync(x => x.Id == productId);
 
             return result;
         }
@@ -43,7 +46,8 @@ namespace Product.Infrastructure
 
         public async Task<List<Domain.Entity.Product>> FindProductsByFeatureAsync()
         {
-            var result = await _dbContext.Products.Where(x => x.Deleted == false && x.Visible == true && x.Featured == true).Include(x => x.Variants.Where(x => x.Deleted == false && x.Visible == true)).ToListAsync();
+            //var result = await _dbContext.Products.Where(x => x.Deleted == false && x.Visible == true && x.Featured == true).Include(x => x.Variants.Where(x => x.Deleted == false && x.Visible == true)).ToListAsync();
+            var result = await _dbContext.Products.Include(x => x.Variants).ToListAsync();
 
             return result;
 
@@ -51,7 +55,9 @@ namespace Product.Infrastructure
 
         private async Task<List<Domain.Entity.Product>> FindProductBySearchOnLinq(string searchText)
         {
-            var result = await _dbContext.Products.Where(x => x.Deleted == false && x.Visible == true && x.Title.ToLower().Contains(searchText.ToLower()) || x.Description.ToLower().Contains(searchText.ToLower())).Include(v => v.Variants.Where(x => x.Deleted == false && v.Visible == true)).ToListAsync();
+            //var result = await _dbContext.Products.Where(x => x.Deleted == false && x.Visible == true && x.Title.ToLower().Contains(searchText.ToLower()) || x.Description.ToLower().Contains(searchText.ToLower())).Include(v => v.Variants.Where(x => x.Deleted == false && v.Visible == true)).ToListAsync();
+
+            var result = await _dbContext.Products.Where(x => x.Title.ToLower().Contains(searchText.ToLower()) || x.Description.ToLower().Contains(searchText.ToLower())).Include(v => v.Variants).ToListAsync();
 
             return result;
         }
@@ -61,6 +67,16 @@ namespace Product.Infrastructure
             var result = await FindProductBySearchOnLinq(searchText);
 
             return result;
+        }
+
+        public async Task<(List<Domain.Entity.Product>, double)> FindProductBySearchAsync(string searchText, int page)
+        {
+            var pageResults = 2f;
+            var pageCount = Math.Ceiling((await FindProductBySearchOnLinq(searchText)).Count / pageResults);
+
+            var products = await _dbContext.Products.Where(p => p.Title.ToLower().Contains(searchText.ToLower()) || p.Description.ToLower().Contains(searchText.ToLower())).Include(p => p.Variants).Skip((page - 1) * (int)pageResults).Take((int)pageResults).ToListAsync();
+
+            return (products, pageCount);
         }
 
         public async Task<List<string>> GetProductSearchSuggestionsAsync(string searchText)

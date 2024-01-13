@@ -2,11 +2,7 @@
 using Product.Domain;
 using Product.Domain.Entity;
 using Product.Infrastructure.DBContexts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Product.Infrastructure
 {
@@ -30,7 +26,10 @@ namespace Product.Infrastructure
         public async Task<List<ProductType>> GetProductTypeByProductIdAsync(Guid ProductId)
         {
             List<ProductType> productTypes = new List<ProductType>();
-            var result = await _dbContext.ProductVariants.Where(x => x.Deleted == false && x.Visible == true && x.ProductId == ProductId).ToListAsync();
+            //var result = await _dbContext.ProductVariants.Where(x => x.Deleted ==
+            //false && x.Visible == true && x.ProductId == ProductId).ToListAsync();
+
+            var result = await _dbContext.ProductVariants.Where(x => x.ProductId == ProductId).ToListAsync();
 
             foreach (var item in result)
             {
