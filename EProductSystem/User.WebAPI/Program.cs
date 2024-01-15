@@ -18,8 +18,16 @@ builder.Services.AddDbContext<UserDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+// 注入Redis缓存
+builder.Services.AddStackExchangeRedisCache(opt =>
+{
+    opt.Configuration = "127.0.01";
+    opt.InstanceName = "shop_";
+});
+
 // 注入自定义服务
 builder.Services.AddScoped<ISmsCodeSender, SmsCodeSender>();
+
 
 var app = builder.Build();
 
