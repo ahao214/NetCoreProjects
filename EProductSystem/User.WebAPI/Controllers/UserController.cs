@@ -20,6 +20,11 @@ namespace User.WebAPI.Controllers
             _dbContext = dbContext;
         }
 
+        /// <summary>
+        /// 注册新用户
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
         [HttpPost]
         [UnitOfWork(typeof(UserDbContext))]
         [NotCheckJwtVersion]
@@ -35,6 +40,7 @@ namespace User.WebAPI.Controllers
             var user = new User.Domain.Entity.User(req.phone, req.name);
             user.ChangePassword(req.password);
             _dbContext.Users.Add(user);
+            resp.Message = "注册成功";
 
             return Ok(resp);
         }
