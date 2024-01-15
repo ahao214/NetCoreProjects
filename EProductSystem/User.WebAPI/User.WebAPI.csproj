@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common.Jwt\Common.Jwt.csproj" />
     <ProjectReference Include="..\User.Domain\User.Domain.csproj" />
     <ProjectReference Include="..\User.Infrastructure\User.Infrastructure.csproj" />
   </ItemGroup>

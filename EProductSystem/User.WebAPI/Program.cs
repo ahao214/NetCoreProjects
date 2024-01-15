@@ -6,6 +6,7 @@ using User.Infrastructure.DbContexts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using User.WebAPI;
+using Common.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(opt =>
+{
+    // 启用Swagger鉴权组件
+    opt.AddAuthenticationHeader();
+});
+
+// 注入Jwt服务
+var JwtConfig = builder.Configuration.GetSection("Jwt");
+builder.Services.AddJwtAuthentication(JwtConfig.Get<JwtSetting>());
+builder.Services.Configure<JwtSetting>(JwtConfig);
+
 
 // 注入DbContext
 builder.Services.AddDbContext<UserDbContext>(opt =>
@@ -29,6 +40,10 @@ builder.Services.AddStackExchangeRedisCache(opt =>
     opt.InstanceName = "shop_";
 });
 
+// 注入MediatR
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+
+
 // 注入事物单元服务
 builder.Services.Configure<MvcOptions>(opt =>
 {
@@ -39,9 +54,7 @@ builder.Services.Configure<MvcOptions>(opt =>
 builder.Services.AddScoped<UserDomainService>();
 builder.Services.AddScoped<ISmsCodeSender, SmsCodeSender>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-// 注入MediatR
-builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 
 var app = builder.Build();
