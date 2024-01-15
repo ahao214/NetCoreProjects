@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using User.Domain;
 using User.Infrastructure;
 using User.Infrastructure.DbContexts;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +31,10 @@ builder.Services.AddStackExchangeRedisCache(opt =>
 builder.Services.AddScoped<UserDomainService>();
 builder.Services.AddScoped<ISmsCodeSender, SmsCodeSender>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+// ×¢ÈëMediatR
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+
 
 var app = builder.Build();
 
