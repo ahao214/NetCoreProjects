@@ -27,7 +27,7 @@ builder.Services.AddStackExchangeRedisCache(opt =>
 
 // 注入自定义服务
 builder.Services.AddScoped<ISmsCodeSender, SmsCodeSender>();
-
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
