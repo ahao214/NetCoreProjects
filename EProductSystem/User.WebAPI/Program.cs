@@ -47,7 +47,11 @@ builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 // 注入事物单元服务
 builder.Services.Configure<MvcOptions>(opt =>
 {
+    // 注入事物单元过滤器服务
     opt.Filters.Add<UnitOfWorkFilter>();
+
+    // 注入Jwt提前撤回过滤器服务
+    opt.Filters.Add<JwtVersionCheckFilter>();
 });
 
 // 注入自定义服务
