@@ -4,6 +4,8 @@ using User.Domain;
 using User.Infrastructure;
 using User.Infrastructure.DbContexts;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using User.WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,12 @@ builder.Services.AddStackExchangeRedisCache(opt =>
 {
     opt.Configuration = "127.0.01";
     opt.InstanceName = "shop_";
+});
+
+// 注入事物单元服务
+builder.Services.Configure<MvcOptions>(opt =>
+{
+    opt.Filters.Add<UnitOfWorkFilter>();
 });
 
 // 注入自定义服务
