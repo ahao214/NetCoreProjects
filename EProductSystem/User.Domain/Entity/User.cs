@@ -3,7 +3,7 @@ using User.Domain.ValueObject;
 
 namespace User.Domain.Entity
 {
-    public class User
+    public class User: IAggregateRoot
     {
         public Guid Id { get; init; }
         public DateTime DateCreated { get; init; }

@@ -7,7 +7,7 @@ using User.Domain.ValueObject;
 
 namespace User.Domain.Entity
 {
-    public class UserLoginHistory //: IAggregateRoot
+    public class UserLoginHistory : IAggregateRoot
     {
         public long Id { get; set; }
         public Guid? UserId { get; set; }
