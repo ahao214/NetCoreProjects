@@ -56,9 +56,13 @@ public static class IOCExtend
         // 注入仓储层
         services.AddScoped<IArticleRepository, ArticleRepository>();
         services.AddScoped<IArticleTypeRepository, ArticleTypeRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+
         // 注入服务层
         services.AddScoped<IArticleService, ArticleService>();
         services.AddScoped<IArticleTypeService, ArticleTypeService>();
+        services.AddScoped<IUserService, UserService>();
+
 
         return services;
     }
