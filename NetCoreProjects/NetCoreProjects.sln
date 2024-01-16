@@ -47,6 +47,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "YCodeBlogs", "YCodeBlogs", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joker.Net.MyBlog", "..\YCodeBlogSystem\Joker.Net.MyBlog\Joker.Net.MyBlog.csproj", "{2EC61CF1-5774-49FC-8324-55638EBE278F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joker.Net.Model", "..\YCodeBlogSystem\Joker.Net.Model\Joker.Net.Model.csproj", "{8A269D75-8E52-46F8-97C7-3AD658B7CD11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,10 @@ Global
 		{2EC61CF1-5774-49FC-8324-55638EBE278F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EC61CF1-5774-49FC-8324-55638EBE278F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EC61CF1-5774-49FC-8324-55638EBE278F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A269D75-8E52-46F8-97C7-3AD658B7CD11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A269D75-8E52-46F8-97C7-3AD658B7CD11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A269D75-8E52-46F8-97C7-3AD658B7CD11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A269D75-8E52-46F8-97C7-3AD658B7CD11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,6 +147,7 @@ Global
 		{7967A2A3-223D-4666-AFD6-6C0EE5B57100} = {F9D034ED-814E-4D11-9168-5096568553B5}
 		{F792846D-3FB7-43FE-9839-768D861AAEF4} = {F9D034ED-814E-4D11-9168-5096568553B5}
 		{2EC61CF1-5774-49FC-8324-55638EBE278F} = {65B7202E-0D84-4476-ACEE-0CF56D658ECE}
+		{8A269D75-8E52-46F8-97C7-3AD658B7CD11} = {65B7202E-0D84-4476-ACEE-0CF56D658ECE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42A8C8AD-B81A-4791-A447-F3A021C89436}
