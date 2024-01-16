@@ -1,5 +1,7 @@
-﻿using Joker.Net.IBaseService;
+﻿using AutoMapper;
+using Joker.Net.IBaseService;
 using Joker.Net.Model;
+using Joker.Net.Model.DTO;
 using Joker.Net.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +14,12 @@ namespace Joker.Net.MyBlog.Controllers
     {
 
         private readonly IArticleService _articleService;
+        private readonly IMapper _mapper;
 
-        public ArticleController(IArticleService articleService)
+        public ArticleController(IArticleService articleService, IMapper mapper)
         {
             _articleService = articleService;
+            _mapper = mapper;
         }
 
 
@@ -27,13 +31,13 @@ namespace Joker.Net.MyBlog.Controllers
             {
                 return ApiResultHelper.Error("没有更多的文章");
             }
-            //List<Article> lst = new List<Article>();
-            //foreach (var item in data)
-            //{
-            //    lst.Add(item);
-            //}
-            data.ForEach(x => x.Type = null);
-            return ApiResultHelper.Success(data);
+            List<ArticleDTO> lst = new List<ArticleDTO>();
+            foreach (var item in data)
+            {
+                lst.Add(_mapper.Map<ArticleDTO>(item));
+            }
+
+            return ApiResultHelper.Success(lst);
         }
 
 
