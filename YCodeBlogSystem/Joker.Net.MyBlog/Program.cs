@@ -83,10 +83,10 @@ builder.Services.AddDbContext<SqlDbContext>(opt =>
 });
 
 // 注入Filter服务
-builder.Services.Configure<MvcOptions>(opt =>
-{
-    opt.Filters.Add<JwtVersionCheckFilter>();
-});
+//builder.Services.Configure<MvcOptions>(opt =>
+//{
+//    opt.Filters.Add<JwtVersionCheckFilter>();
+//});
 
 // 注入AutoMapper服务
 builder.Services.AddAutoMapper(typeof(DTOMapper));
