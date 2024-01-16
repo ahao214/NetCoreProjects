@@ -1,5 +1,4 @@
-﻿
-using Joker.Net.Model;
+﻿using Joker.Net.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
