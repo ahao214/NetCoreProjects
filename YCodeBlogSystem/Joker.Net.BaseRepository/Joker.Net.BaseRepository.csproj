@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Joker.Net.EFCoreEnvironment\Joker.Net.EFCoreEnvironment.csproj" />
     <ProjectReference Include="..\Joker.Net.IBaseRepository\Joker.Net.IBaseRepository.csproj" />
+    <ProjectReference Include="..\Joker.Net.Model\Joker.Net.Model.csproj" />
   </ItemGroup>
 
 </Project>
