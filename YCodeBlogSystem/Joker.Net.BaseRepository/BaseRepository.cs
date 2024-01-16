@@ -1,5 +1,6 @@
 ﻿using Joker.Net.EFCoreEnvironment.DbContexts;
 using Joker.Net.IBaseRepository;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using System.Linq.Expressions;
 
@@ -21,24 +22,24 @@ namespace Joker.Net.BaseRepository
             return await UpdateAsync(entity);
         }
 
-        public async Task<List<TEntity>> FindAllAsync()
+        public virtual async Task<List<TEntity>> FindAllAsync()
         {
             return await _db.Set<TEntity>().ToListAsync();
 
         }
 
-        public async Task<List<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> del)
+        public virtual async Task<List<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> del)
         {
             return await _db.Set<TEntity>().Where(del).ToListAsync();
 
         }
 
-        public async Task<TEntity> FindOneAsync(Guid id)
+        public virtual async Task<TEntity> FindOneAsync(Guid id)
         {
-            return await _db.set<TEntity>().FindAsync(id);
+            return await _db.Set<TEntity>().FindAsync(id);
         }
 
-        public async Task<TEntity> FindOneAsync(Expression<Func<TEntity, bool>> del)
+        public virtual async Task<TEntity> FindOneAsync(Expression<Func<TEntity, bool>> del)
         {
             return  await _db.Set<TEntity>().FirstOrDefaultAsync(del);
 
