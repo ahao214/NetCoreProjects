@@ -1,11 +1,8 @@
 ﻿using Joker.Net.EFCoreEnvironment.DbContexts;
 using Joker.Net.IBaseRepository;
 using Joker.Net.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Joker.Net.BaseRepository
 {
@@ -17,6 +14,26 @@ namespace Joker.Net.BaseRepository
         {
             base._db = dbContext;
             _dbContext = dbContext; 
+        }
+
+        public override async Task<List<ArticleType>> FindAllAsync()
+        {
+            return await _dbContext.articleTypes.Include(x => x.Articles).ToListAsync();
+        }
+
+        public async override Task<List<ArticleType>> FindAllAsync(Expression<Func<ArticleType, bool>> del)
+        {
+            return await _dbContext.articleTypes.Where(del).Include(x => x.Articles).ToListAsync();
+        }
+
+        public override async Task<ArticleType> FindOneAsync(Guid id)
+        {
+            return await _dbContext.articleTypes.Include(x => x.Articles).SingleOrDefaultAsync(x => x.Id == id);
+        }
+
+        public override async Task<ArticleType> FindOneAsync(Expression<Func<ArticleType, bool>> del)
+        {
+            return await _dbContext.articleTypes.Include(x => x.Articles).SingleOrDefaultAsync(del);
         }
 
     }
