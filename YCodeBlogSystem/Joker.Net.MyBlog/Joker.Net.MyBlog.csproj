@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Joker.Net.BaseRepository\Joker.Net.BaseRepository.csproj" />
     <ProjectReference Include="..\Joker.Net.BaseService\Joker.Net.BaseService.csproj" />
     <ProjectReference Include="..\Joker.Net.EFCoreEnvironment\Joker.Net.EFCoreEnvironment.csproj" />
+    <ProjectReference Include="..\Joker.Net.Utility\Joker.Net.Utility.csproj" />
   </ItemGroup>
 
 </Project>
