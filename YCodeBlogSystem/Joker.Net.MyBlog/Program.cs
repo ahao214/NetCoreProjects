@@ -1,3 +1,6 @@
+using Joker.Net.EFCoreEnvironment.DbContexts;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,10 +13,10 @@ builder.Services.AddSwaggerGen();
 
 
 // ×¢ÈëDbContext
-//builder.Services.AddDbContext<UserDbContext>(opt =>
-//{
-//    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-//});
+builder.Services.AddDbContext<SqlDbContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 var app = builder.Build();
 
