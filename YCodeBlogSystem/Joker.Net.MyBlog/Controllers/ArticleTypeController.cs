@@ -1,5 +1,7 @@
-﻿using Joker.Net.IBaseService;
+﻿using AutoMapper;
+using Joker.Net.IBaseService;
 using Joker.Net.Model;
+using Joker.Net.Model.DTO;
 using Joker.Net.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -12,14 +14,16 @@ namespace Joker.Net.MyBlog.Controllers
     public class ArticleTypeController : ControllerBase
     {
         private readonly IArticleTypeService _articleTypeService;
+        private readonly IMapper _mapper;
 
-        public ArticleTypeController(IArticleTypeService articleTypeService)
+        public ArticleTypeController(IArticleTypeService articleTypeService, IMapper mapper)
         {
             this._articleTypeService = articleTypeService;
+            _mapper = mapper;
         }
 
         [HttpGet("GetTypes")]
-        
+
         public async Task<ActionResult<ApiResult>> GetTypes()
         {
             var data = await _articleTypeService.FindAllAsync();
@@ -28,17 +32,17 @@ namespace Joker.Net.MyBlog.Controllers
                 return ApiResultHelper.Error("没有更多的文章类型");
             }
 
-            List<ArticleType> articleType = new List<ArticleType>();
-            foreach (var type in data)
+            List<ArticleTypeDTO> articleTypeDTO = new List<ArticleTypeDTO>();
+            foreach (var item in data)
             {
-                articleType.Add(type);
+                articleTypeDTO.Add(_mapper.Map<ArticleTypeDTO>(item));
             }
 
-            return ApiResultHelper.Success(articleType);
+            return ApiResultHelper.Success(articleTypeDTO);
         }
 
         [HttpPost("Create")]
-        
+
         public async Task<ActionResult<ApiResult>> Create(string TypeName)
         {
             ArticleType type = new ArticleType()
@@ -58,7 +62,7 @@ namespace Joker.Net.MyBlog.Controllers
         }
 
         [HttpDelete("Deleted")]
-        
+
         public async Task<ActionResult<ApiResult>> Delete(Guid id)
         {
             var data = await _articleTypeService.FindOneAsync(id);
@@ -80,7 +84,7 @@ namespace Joker.Net.MyBlog.Controllers
         }
 
         [HttpPut("Edit")]
-        
+
         public async Task<ActionResult<ApiResult>> Edit(Guid id, string TypeName)
         {
             var data = await _articleTypeService.FindOneAsync(id);
