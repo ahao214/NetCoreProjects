@@ -4,6 +4,7 @@ using Joker.Net.EFCoreEnvironment.DbContexts;
 using Joker.Net.IBaseRepository;
 using Joker.Net.IBaseService;
 using Joker.Net.Model;
+using Joker.Net.Utility;
 using Joker.Net.Utility.Mappers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// 读取配置文件中jwt的信息，然后通过Configuration配置系统注入到Controller层进行授权
+builder.Services.Configure<JwtSetting>(builder.Configuration.GetSection("Jwt"));
 
 
 
