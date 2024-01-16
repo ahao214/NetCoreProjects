@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,29 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// 启动Swagger鉴权组件
+builder.Services.AddSwaggerGen(opt =>
+{
+
+    var scheme = new OpenApiSecurityScheme()
+    {
+        Description = $"Authorization header \r\n Example: 'Bearer xxxxxxxxxxxxxxxx'",
+        Reference = new OpenApiReference() { Type = ReferenceType.SecurityScheme, Id = "Authorization" },
+        Scheme = "oauth2",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey
+    };
+
+    opt.AddSecurityDefinition("Authorization", scheme);
+
+    var requirement = new OpenApiSecurityRequirement();
+    requirement[scheme] = new List<string>();
+    opt.AddSecurityRequirement(requirement);
+
+});
+
 
 // 读取配置文件中jwt的信息，然后通过Configuration配置系统注入到Controller层进行授权
 builder.Services.Configure<JwtSetting>(builder.Configuration.GetSection("Jwt"));
