@@ -5,7 +5,9 @@ using Joker.Net.Model.DTO;
 using Joker.Net.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using System.Security.Claims;
+using System.Text.Json;
 
 
 namespace Joker.Net.MyBlog.Controllers
@@ -18,15 +20,15 @@ namespace Joker.Net.MyBlog.Controllers
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
+        private readonly IDistributedCache _cache;
 
-
-        public UserController(IUserService userService, IMapper mapper, UserManager<User> userManager, RoleManager<Role> roleManager)
+        public UserController(IUserService userService, IMapper mapper, UserManager<User> userManager, RoleManager<Role> roleManager, IDistributedCache cache)
         {
             _userService = userService;
             _mapper = mapper;
             _userManager = userManager;
             _roleManager = roleManager;
-
+            _cache = cache;
         }
 
 

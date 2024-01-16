@@ -115,7 +115,7 @@ namespace Joker.Net.MyBlog.Controllers
             /*
                 调用发送短信Api
              */
-            // SMSHelper.UseSMS(user.PhoneNumber, token);
+            SMSHelper.UseSMS(user.PhoneNumber, token);
 
             //将验证码存入redis
             await _cache.SetStringAsync($"sms_{user.Id}", JsonSerializer.Serialize(token), new DistributedCacheEntryOptions()

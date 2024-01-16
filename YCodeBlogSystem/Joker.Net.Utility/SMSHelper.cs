@@ -1,4 +1,7 @@
-﻿using AlibabaCloud.SDK.Dysmsapi20170525.Models;
+﻿using AlibabaCloud.OpenApiClient.Models;
+using AlibabaCloud.SDK.Dysmsapi20170525;
+using AlibabaCloud.SDK.Dysmsapi20170525.Models;
+using AlibabaCloud.TeaUtil;
 using AlibabaCloud.TeaUtil.Models;
 using Tea;
 
