@@ -47,6 +47,16 @@ builder.Services.AddSwaggerGen(opt =>
 });
 
 
+// 配置跨域
+builder.Services.AddCors(opt =>
+{
+    opt.AddDefaultPolicy(bui =>
+    {
+        bui.WithOrigins(new string[] { "http://localhost:8080" })
+        .AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+    });
+});
+
 // 读取配置文件中jwt的信息，然后通过Configuration配置系统注入到Controller层进行授权
 builder.Services.Configure<JwtSetting>(builder.Configuration.GetSection("Jwt"));
 
@@ -123,6 +133,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
+app.UseCors();
 
 app.MapControllers();
 
