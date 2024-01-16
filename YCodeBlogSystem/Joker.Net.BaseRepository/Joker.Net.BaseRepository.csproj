@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Joker.Net.EFCoreEnvironment\Joker.Net.EFCoreEnvironment.csproj" />
+    <ProjectReference Include="..\Joker.Net.IBaseRepository\Joker.Net.IBaseRepository.csproj" />
+  </ItemGroup>
+
+</Project>

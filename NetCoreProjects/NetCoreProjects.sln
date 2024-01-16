@@ -55,6 +55,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joker.Net.IBaseRepository", "..\YCodeBlogSystem\Joker.Net.IBaseRepository\Joker.Net.IBaseRepository.csproj", "{F48BB5AC-44B9-40C7-8DB5-2010F89160A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joker.Net.BaseRepository", "..\YCodeBlogSystem\Joker.Net.BaseRepository\Joker.Net.BaseRepository.csproj", "{50922928-C719-4C6A-80B3-D9AF24908B8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +139,10 @@ Global
 		{F48BB5AC-44B9-40C7-8DB5-2010F89160A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F48BB5AC-44B9-40C7-8DB5-2010F89160A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F48BB5AC-44B9-40C7-8DB5-2010F89160A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50922928-C719-4C6A-80B3-D9AF24908B8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50922928-C719-4C6A-80B3-D9AF24908B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50922928-C719-4C6A-80B3-D9AF24908B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50922928-C719-4C6A-80B3-D9AF24908B8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,6 +171,7 @@ Global
 		{A9BFBD74-5110-4259-A671-F6530E16383B} = {65B7202E-0D84-4476-ACEE-0CF56D658ECE}
 		{3CF8E043-9E13-4B34-9CD2-CB415EE43498} = {65B7202E-0D84-4476-ACEE-0CF56D658ECE}
 		{F48BB5AC-44B9-40C7-8DB5-2010F89160A9} = {3CF8E043-9E13-4B34-9CD2-CB415EE43498}
+		{50922928-C719-4C6A-80B3-D9AF24908B8A} = {3CF8E043-9E13-4B34-9CD2-CB415EE43498}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42A8C8AD-B81A-4791-A447-F3A021C89436}
