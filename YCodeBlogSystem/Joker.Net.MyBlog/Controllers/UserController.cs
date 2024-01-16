@@ -5,6 +5,7 @@ using Joker.Net.Model.DTO;
 using Joker.Net.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 
 namespace Joker.Net.MyBlog.Controllers
@@ -100,29 +101,29 @@ namespace Joker.Net.MyBlog.Controllers
             return ApiResultHelper.Success(data.Succeeded);
         }
 
-        //[HttpPut("ResetPassword")]
-        //public async Task<ActionResult<ApiResult>> ResetPassword(string token, string newPwd)
-        //{
-        //    var user = await _userManager.FindByIdAsync(this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        [HttpPut("ResetPassword")]
+        public async Task<ActionResult<ApiResult>> ResetPassword(string token, string newPwd)
+        {
+            var user = await _userManager.FindByIdAsync(this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-        //    string tokenFromRedis = JsonSerializer.Deserialize<string>(await _cache.GetAsync($"sms_{user.Id}"));
-        //    if (!tokenFromRedis.Equals(token))
-        //    {
-        //        return ApiResultHelper.Error($"验证码有误!修改密码失败!");
-        //    }
+            string tokenFromRedis = JsonSerializer.Deserialize<string>(await _cache.GetAsync($"sms_{user.Id}"));
+            if (!tokenFromRedis.Equals(token))
+            {
+                return ApiResultHelper.Error($"验证码有误!修改密码失败!");
+            }
 
-        //    var result = await _userManager.ResetPasswordAsync(user, token, newPwd);
+            var result = await _userManager.ResetPasswordAsync(user, token, newPwd);
 
-        //    user.JwtVersion++;
-        //    await _userManager.UpdateAsync(user);
+            user.JwtVersion++;
+            await _userManager.UpdateAsync(user);
 
-        //    if (!result.Succeeded)
-        //    {
-        //        return ApiResultHelper.Error($"验证码有误!修改密码失败!");
-        //    }
+            if (!result.Succeeded)
+            {
+                return ApiResultHelper.Error($"验证码有误!修改密码失败!");
+            }
 
-        //    return ApiResultHelper.Success("重置成功!");
-        //}
+            return ApiResultHelper.Success("重置成功!");
+        }
 
     }
 }
