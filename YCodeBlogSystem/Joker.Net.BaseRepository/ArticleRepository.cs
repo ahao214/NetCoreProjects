@@ -18,22 +18,22 @@ namespace Joker.Net.BaseRepository
 
         public override async Task<List<Article>> FindAllAsync()
         {
-            return await _dbContext.articles.Include(x => x.Type).ToListAsync();
+            return await _dbContext.articles.Include(x => x.User).Include(x => x.Type).ToListAsync();
         }
 
         public override async Task<List<Article>> FindAllAsync(Expression<Func<Article, bool>> del)
         {
-            return await _dbContext.articles.Where(del).Include(x => x.Type).ToListAsync();
+            return await _dbContext.articles.Where(del).Include(x => x.User).Include(x => x.Type).ToListAsync();
         }
 
         public override async Task<Article> FindOneAsync(Guid id)
         {
-            return await _dbContext.articles.Include(x => x.Type).SingleOrDefaultAsync(x => x.Id == id);
+            return await _dbContext.articles.Include(x => x.User).Include(x => x.Type).SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public override async Task<Article> FindOneAsync(Expression<Func<Article, bool>> del)
         {
-            return await _dbContext.articles.Include(x => x.Type).SingleOrDefaultAsync(del);
+            return await _dbContext.articles.Include(x => x.User).Include(x => x.Type).SingleOrDefaultAsync(del);
         }
 
     }
