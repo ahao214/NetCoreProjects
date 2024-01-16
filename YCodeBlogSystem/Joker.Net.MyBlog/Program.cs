@@ -3,6 +3,7 @@ using Joker.Net.BaseService;
 using Joker.Net.EFCoreEnvironment.DbContexts;
 using Joker.Net.IBaseRepository;
 using Joker.Net.IBaseService;
+using Joker.Net.Utility.Mappers;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,10 @@ builder.Services.AddDbContext<SqlDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+// 注入AutoMapper服务
+builder.Services.AddAutoMapper(typeof(DTOMapper));
+
 
 // 自定义依赖注入
 builder.Services.AddCustomIOC();
