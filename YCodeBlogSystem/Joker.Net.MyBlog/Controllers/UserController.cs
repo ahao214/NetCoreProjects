@@ -17,7 +17,7 @@ namespace Joker.Net.MyBlog.Controllers
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
-       
+
 
         public UserController(IUserService userService, IMapper mapper, UserManager<User> userManager, RoleManager<Role> roleManager)
         {
@@ -25,7 +25,7 @@ namespace Joker.Net.MyBlog.Controllers
             _mapper = mapper;
             _userManager = userManager;
             _roleManager = roleManager;
-            
+
         }
 
 
@@ -81,25 +81,24 @@ namespace Joker.Net.MyBlog.Controllers
 
         }
 
-        //[HttpPut("EditName")]
+        [HttpPut("EditName")]
+        public async Task<ActionResult<ApiResult>> EditName(string NewName)
+        {
+            var user = await _userManager.FindByIdAsync(this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if (user is null)
+            {
+                return ApiResultHelper.Error($"修改用户名失败");
+            }
 
-        //public async Task<ActionResult<ApiResult>> EditName(string NewName)
-        //{
-        //    var user = await _userManager.FindByIdAsync(this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
-        //    if (user is null)
-        //    {
-        //        return ApiResultHelper.Error($"修改用户名失败");
-        //    }
+            user.JwtVersion++;
+            var data = await _userManager.UpdateAsync(user);
+            if (!data.Succeeded)
+            {
+                return ApiResultHelper.Error($"修改用户名失败");
+            }
 
-        //    user.JwtVersion++;
-        //    var data = await _userManager.UpdateAsync(user);
-        //    if (!data.Succeeded)
-        //    {
-        //        return ApiResultHelper.Error($"修改用户名失败");
-        //    }
-
-        //    return ApiResultHelper.Success(data.Succeeded);
-        //}
+            return ApiResultHelper.Success(data.Succeeded);
+        }
 
         //[HttpPut("ResetPassword")]
         //public async Task<ActionResult<ApiResult>> ResetPassword(string token, string newPwd)

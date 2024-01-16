@@ -22,12 +22,14 @@ namespace Joker.Net.MyBlog.Controllers
         private readonly IOptionsSnapshot<JwtSetting> _settings;
         private readonly IUserService _userService;
         private readonly UserManager<User> _userManager;
+        private readonly IDistributedCache _cache;
 
-        public AuthorizeController(IOptionsSnapshot<JwtSetting> settings, IUserService userService, UserManager<User> userManager)
+        public AuthorizeController(IOptionsSnapshot<JwtSetting> settings, IUserService userService, UserManager<User> userManager, IDistributedCache cache)
         {
             _settings = settings;
             _userService = userService;
             _userManager = userManager;
+            _cache = cache;
         }
 
 
@@ -113,7 +115,7 @@ namespace Joker.Net.MyBlog.Controllers
             /*
                 调用发送短信Api
              */
-            SMSHelper.UseSMS(user.PhoneNumber, token);
+            // SMSHelper.UseSMS(user.PhoneNumber, token);
 
             //将验证码存入redis
             await _cache.SetStringAsync($"sms_{user.Id}", JsonSerializer.Serialize(token), new DistributedCacheEntryOptions()
