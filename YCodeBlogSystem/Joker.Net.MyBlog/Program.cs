@@ -6,8 +6,11 @@ using Joker.Net.IBaseService;
 using Joker.Net.Model;
 using Joker.Net.Utility;
 using Joker.Net.Utility.Mappers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +24,30 @@ builder.Services.AddSwaggerGen();
 // 读取配置文件中jwt的信息，然后通过Configuration配置系统注入到Controller层进行授权
 builder.Services.Configure<JwtSetting>(builder.Configuration.GetSection("Jwt"));
 
+// 配置Jwt：鉴权
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(opt =>
+    {
+
+        var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSetting>();
+        byte[] keyBytes = Encoding.UTF8.GetBytes(jwtSettings.SecKey);
+        var secKey = new SymmetricSecurityKey(keyBytes);
+
+        opt.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuer = true,
+            ValidIssuer = jwtSettings.Issuer,  //代表颁发Token的web应用程序
+
+            ValidateAudience = true,
+            ValidAudience = jwtSettings.Audience,  //Token的受理者
+
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = secKey,
+            ClockSkew = TimeSpan.FromSeconds(jwtSettings.ExpireSeconds)
+        };
+
+    });
 
 
 // 注入DbContext
@@ -50,7 +77,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+//鉴权
+app.UseAuthentication();
+//授权
 app.UseAuthorization();
+
+
 
 app.MapControllers();
 
