@@ -4,10 +4,12 @@ using Joker.Net.EFCoreEnvironment.DbContexts;
 using Joker.Net.IBaseRepository;
 using Joker.Net.IBaseService;
 using Joker.Net.Model;
+using Joker.Net.MyBlog.Filters;
 using Joker.Net.Utility;
 using Joker.Net.Utility.Mappers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -80,6 +82,12 @@ builder.Services.AddDbContext<SqlDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+// 注入Filter服务
+builder.Services.Configure<MvcOptions>(opt =>
+{
+    opt.Filters.Add<JwtVersionCheckFilter>();
+});
+
 // 注入AutoMapper服务
 builder.Services.AddAutoMapper(typeof(DTOMapper));
 
@@ -89,6 +97,14 @@ builder.Services.AddCustomIOC();
 
 // Identity注入
 builder.Services.AddIdentity();
+
+// 注入Redis缓存服务
+//注入Redis缓存服务
+builder.Services.AddStackExchangeRedisCache(opt =>
+{
+    opt.Configuration = "localhost"; //redis地址
+    opt.InstanceName = "blog_";      //缓存前缀
+});
 
 var app = builder.Build();
 

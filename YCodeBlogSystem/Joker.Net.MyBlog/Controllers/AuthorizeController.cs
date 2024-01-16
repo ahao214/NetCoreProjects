@@ -1,14 +1,17 @@
 ﻿using Joker.Net.IBaseService;
 using Joker.Net.Model;
 using Joker.Net.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 
 namespace Joker.Net.MyBlog.Controllers
 {
@@ -49,6 +52,9 @@ namespace Joker.Net.MyBlog.Controllers
             {
                 // 重置登录次数
                 await _userManager.ResetAccessFailedCountAsync(isExist);
+
+                isExist.JwtVersion++;
+                await _userManager.UpdateAsync(isExist);
 
                 //颁发令牌
                 //1. 声明payload
@@ -93,6 +99,29 @@ namespace Joker.Net.MyBlog.Controllers
         }
 
 
+        [HttpGet("ResetPwdToken")]
+        public async Task<ActionResult<ApiResult>> SendResetPwdToken()
+        {
+            var user = await _userManager.FindByIdAsync(this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if (user is null)
+            {
+                return ApiResultHelper.Error($"发送失败!");
+            }
 
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            /*
+                调用发送短信Api
+             */
+            SMSHelper.UseSMS(user.PhoneNumber, token);
+
+            //将验证码存入redis
+            await _cache.SetStringAsync($"sms_{user.Id}", JsonSerializer.Serialize(token), new DistributedCacheEntryOptions()
+            {
+                AbsoluteExpiration = DateTimeOffset.UtcNow.AddMinutes(5)
+            });
+
+            return ApiResultHelper.Success(token);
+        }
     }
 }
