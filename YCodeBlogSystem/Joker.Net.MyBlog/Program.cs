@@ -1,4 +1,8 @@
+using Joker.Net.BaseRepository;
+using Joker.Net.BaseService;
 using Joker.Net.EFCoreEnvironment.DbContexts;
+using Joker.Net.IBaseRepository;
+using Joker.Net.IBaseService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +22,9 @@ builder.Services.AddDbContext<SqlDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+// 自定义依赖注入
+builder.Services.AddCustomIOC();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,3 +41,21 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+
+public static class IOCExtend
+{
+    public static IServiceCollection AddCustomIOC(this IServiceCollection services)
+    {
+        // 注入仓储层
+        services.AddScoped<IArticleRepository, ArticleRepository>();
+        services.AddScoped<IArticleTypeRepository, ArticleTypeRepository>();
+        // 注入服务层
+        services.AddScoped<IArticleService, ArticleService>();
+        services.AddScoped<IArticleTypeService, ArticleTypeService>();
+
+        return services;
+    }
+
+}
