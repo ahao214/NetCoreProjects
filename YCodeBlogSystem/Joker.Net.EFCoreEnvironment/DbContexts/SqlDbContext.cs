@@ -1,9 +1,10 @@
 ﻿using Joker.Net.Model;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Joker.Net.EFCoreEnvironment.DbContexts
 {
-    public class SqlDbContext : DbContext
+    public class SqlDbContext : IdentityDbContext<User, Role, Guid>
     {
         public SqlDbContext(DbContextOptions options) : base(options)
         {
@@ -13,6 +14,7 @@ namespace Joker.Net.EFCoreEnvironment.DbContexts
         public DbSet<Article> articles { get; set; }
 
         public DbSet<ArticleType> articleTypes { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
