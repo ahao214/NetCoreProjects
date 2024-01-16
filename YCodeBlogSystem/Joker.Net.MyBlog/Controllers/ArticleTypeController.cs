@@ -19,7 +19,7 @@ namespace Joker.Net.MyBlog.Controllers
         }
 
         [HttpGet("GetTypes")]
-        [Authorize]
+        
         public async Task<ActionResult<ApiResult>> GetTypes()
         {
             var data = await _articleTypeService.FindAllAsync();
@@ -29,12 +29,16 @@ namespace Joker.Net.MyBlog.Controllers
             }
 
             List<ArticleType> articleType = new List<ArticleType>();
+            foreach (var type in data)
+            {
+                articleType.Add(type);
+            }
 
             return ApiResultHelper.Success(articleType);
         }
 
         [HttpPost("Create")]
-        [Authorize]
+        
         public async Task<ActionResult<ApiResult>> Create(string TypeName)
         {
             ArticleType type = new ArticleType()
@@ -54,7 +58,7 @@ namespace Joker.Net.MyBlog.Controllers
         }
 
         [HttpDelete("Deleted")]
-        [Authorize]
+        
         public async Task<ActionResult<ApiResult>> Delete(Guid id)
         {
             var data = await _articleTypeService.FindOneAsync(id);
@@ -76,7 +80,7 @@ namespace Joker.Net.MyBlog.Controllers
         }
 
         [HttpPut("Edit")]
-        [Authorize]
+        
         public async Task<ActionResult<ApiResult>> Edit(Guid id, string TypeName)
         {
             var data = await _articleTypeService.FindOneAsync(id);

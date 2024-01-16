@@ -27,6 +27,12 @@ namespace Joker.Net.MyBlog.Controllers
             {
                 return ApiResultHelper.Error("没有更多的文章");
             }
+            //List<Article> lst = new List<Article>();
+            //foreach (var item in data)
+            //{
+            //    lst.Add(item);
+            //}
+            data.ForEach(x => x.Type = null);
             return ApiResultHelper.Success(data);
         }
 
