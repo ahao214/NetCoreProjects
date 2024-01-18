@@ -40,6 +40,7 @@ builder.Services.AddDbContext<CartDbContext>(opt =>
 });
 
 // 自定义服务
+builder.Services.AddScoped<CartDomainService>();
 builder.Services.AddScoped<IRabbitMqService, RabbitMqService>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 
