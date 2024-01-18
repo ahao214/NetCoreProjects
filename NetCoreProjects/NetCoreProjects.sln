@@ -79,6 +79,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment", "Payment", "{3AC1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Alipay", "..\EProductSystem\Common.Alipay\Common.Alipay.csproj", "{75D66A79-534E-415A-A930-944082D6206F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.WebAPI", "..\EProductSystem\Payment.WebAPI\Payment.WebAPI.csproj", "{57BC70AA-6CC4-4C1F-A60C-628A346B359E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -193,6 +195,10 @@ Global
 		{75D66A79-534E-415A-A930-944082D6206F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75D66A79-534E-415A-A930-944082D6206F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75D66A79-534E-415A-A930-944082D6206F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57BC70AA-6CC4-4C1F-A60C-628A346B359E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57BC70AA-6CC4-4C1F-A60C-628A346B359E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57BC70AA-6CC4-4C1F-A60C-628A346B359E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57BC70AA-6CC4-4C1F-A60C-628A346B359E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -233,6 +239,7 @@ Global
 		{6B66CB8A-A839-4D8E-B80F-800B57590280} = {EBF9396F-5BF1-4DEF-938A-6999A492012E}
 		{3AC10160-3E81-4EAE-A6C0-665794956E5B} = {EBF9396F-5BF1-4DEF-938A-6999A492012E}
 		{75D66A79-534E-415A-A930-944082D6206F} = {F9D034ED-814E-4D11-9168-5096568553B5}
+		{57BC70AA-6CC4-4C1F-A60C-628A346B359E} = {3AC10160-3E81-4EAE-A6C0-665794956E5B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42A8C8AD-B81A-4791-A447-F3A021C89436}
