@@ -1,5 +1,7 @@
 ﻿using Common.Jwt;
+using Common.RabbitMQ;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using User.Domain;
 using User.Infrastructure.DbContexts;
 using User.WebAPI.Controllers.Request;
@@ -13,11 +15,15 @@ namespace User.WebAPI.Controllers
     {
         private readonly IUserRepository _userRepository;
         private readonly UserDbContext _dbContext;
+        private readonly IRabbitMqService _rabbitMqService;
+        private readonly UserDomainService _userDomainService;
 
-        public UserController(IUserRepository userRepository, UserDbContext dbContext)
+        public UserController(IUserRepository userRepository, UserDbContext dbContext, IRabbitMqService rabbitMqService, UserDomainService userDomainService)
         {
             _userRepository = userRepository;
             _dbContext = dbContext;
+            _rabbitMqService = rabbitMqService;
+            _userDomainService = userDomainService;
         }
 
         /// <summary>
@@ -26,8 +32,8 @@ namespace User.WebAPI.Controllers
         /// <param name="req"></param>
         /// <returns></returns>
         [HttpPost]
-        [UnitOfWork(typeof(UserDbContext))]
-        [NotCheckJwtVersion]
+        //[UnitOfWork(typeof(UserDbContext))]
+        //[NotCheckJwtVersion]
         public async Task<ActionResult<ServiceResponse<string>>> AddNewUser(AddUserRequest req)
         {
             ServiceResponse<string> resp = new ServiceResponse<string>();
@@ -54,6 +60,36 @@ namespace User.WebAPI.Controllers
             return Ok(resp);
         }
 
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        [HttpPost("{password}")]
+        //[UnitOfWork(typeof(UserDbContext))]
+        public async Task<ActionResult<ServiceResponse<bool>>> ChangePassword(string password)
+        {
+            ServiceResponse<bool> resp = new ServiceResponse<bool>();
+            var isExist = await _userRepository.FindOneAsync(Guid.Parse(this.User.FindFirst(ClaimTypes.NameIdentifier).Value));
 
+            if (isExist == null)
+            {
+                resp.Success = false;
+                resp.Message = "修改失败";
+                return BadRequest(resp);
+            }
+
+            isExist.ChangePassword(password);
+
+            _userDomainService.UpdateJwtVersion(isExist);
+
+            _dbContext.Users.Update(isExist);
+
+            await _rabbitMqService.PublishMessage("ycode_shop", isExist.Id.ToString(), isExist.JwtVersion.ToString(), "");
+
+            resp.Message = "修改成功";
+
+            return Ok(resp);
+        }
     }
 }
