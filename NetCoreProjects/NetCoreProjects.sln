@@ -59,11 +59,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joker.Net.BaseRepository", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{08F18B73-F6D4-40AC-8FC0-ECB015665D6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joker.Net.BaseService", "..\YCodeBlogSystem\Joker.Net.BaseService\Joker.Net.BaseService.csproj", "{D207A7A3-FB3C-4E44-B36B-67174F41B885}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joker.Net.BaseService", "..\YCodeBlogSystem\Joker.Net.BaseService\Joker.Net.BaseService.csproj", "{D207A7A3-FB3C-4E44-B36B-67174F41B885}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joker.Net.IBaseService", "..\YCodeBlogSystem\Joker.Net.IBaseService\Joker.Net.IBaseService.csproj", "{8B55A029-FAA4-4E7D-BCE8-0B72EB285B5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joker.Net.IBaseService", "..\YCodeBlogSystem\Joker.Net.IBaseService\Joker.Net.IBaseService.csproj", "{8B55A029-FAA4-4E7D-BCE8-0B72EB285B5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joker.Net.Utility", "..\YCodeBlogSystem\Joker.Net.Utility\Joker.Net.Utility.csproj", "{863E52B1-6EF7-4C9A-8AFF-A7E4E0AA00CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Joker.Net.Utility", "..\YCodeBlogSystem\Joker.Net.Utility\Joker.Net.Utility.csproj", "{863E52B1-6EF7-4C9A-8AFF-A7E4E0AA00CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cart", "Cart", "{230F8898-5994-499D-84D0-7414E2890BC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.Infrastructure", "..\EProductSystem\Cart.Infrastructure\Cart.Infrastructure.csproj", "{3258A529-8807-464F-A355-B924A0933E72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.Domain", "..\EProductSystem\Cart.Domain\Cart.Domain.csproj", "{0818939E-EB4E-426D-9409-D04BBF1055EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart.WebAPI", "..\EProductSystem\Cart.WebAPI\Cart.WebAPI.csproj", "{C27EB77C-4608-4CCC-945E-56CC7CB2F4DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -163,6 +171,18 @@ Global
 		{863E52B1-6EF7-4C9A-8AFF-A7E4E0AA00CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{863E52B1-6EF7-4C9A-8AFF-A7E4E0AA00CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{863E52B1-6EF7-4C9A-8AFF-A7E4E0AA00CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3258A529-8807-464F-A355-B924A0933E72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3258A529-8807-464F-A355-B924A0933E72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3258A529-8807-464F-A355-B924A0933E72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3258A529-8807-464F-A355-B924A0933E72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0818939E-EB4E-426D-9409-D04BBF1055EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0818939E-EB4E-426D-9409-D04BBF1055EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0818939E-EB4E-426D-9409-D04BBF1055EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0818939E-EB4E-426D-9409-D04BBF1055EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C27EB77C-4608-4CCC-945E-56CC7CB2F4DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C27EB77C-4608-4CCC-945E-56CC7CB2F4DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C27EB77C-4608-4CCC-945E-56CC7CB2F4DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C27EB77C-4608-4CCC-945E-56CC7CB2F4DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -196,6 +216,10 @@ Global
 		{D207A7A3-FB3C-4E44-B36B-67174F41B885} = {08F18B73-F6D4-40AC-8FC0-ECB015665D6E}
 		{8B55A029-FAA4-4E7D-BCE8-0B72EB285B5E} = {08F18B73-F6D4-40AC-8FC0-ECB015665D6E}
 		{863E52B1-6EF7-4C9A-8AFF-A7E4E0AA00CA} = {65B7202E-0D84-4476-ACEE-0CF56D658ECE}
+		{230F8898-5994-499D-84D0-7414E2890BC9} = {EBF9396F-5BF1-4DEF-938A-6999A492012E}
+		{3258A529-8807-464F-A355-B924A0933E72} = {230F8898-5994-499D-84D0-7414E2890BC9}
+		{0818939E-EB4E-426D-9409-D04BBF1055EA} = {230F8898-5994-499D-84D0-7414E2890BC9}
+		{C27EB77C-4608-4CCC-945E-56CC7CB2F4DD} = {230F8898-5994-499D-84D0-7414E2890BC9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42A8C8AD-B81A-4791-A447-F3A021C89436}
