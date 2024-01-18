@@ -29,7 +29,11 @@ builder.Services.Configure<MvcOptions>(opt =>
     opt.Filters.Add<CartJwtVersionCheckFilter>();
 });
 
-
+// 注入DbContext
+//builder.Services.AddDbContext<UserDbContext>(opt =>
+//{
+//    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+//});
 
 // 自定义服务
 builder.Services.AddScoped<IRabbitMqService, RabbitMqService>();
