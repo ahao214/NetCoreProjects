@@ -33,7 +33,7 @@ namespace Cart.WebAPI.Controllers
         }
 
         [HttpPost]
-        [UnitOfWork(typeof(CartDbContext))]
+        //[UnitOfWork(typeof(CartDbContext))]
         public async Task<ActionResult<ServiceResponse<bool>>> AddCartItems(CartItem cartItem)
         {
             var result = await _cartDomainService.AddToCart(cartItem, UserId());
@@ -48,7 +48,7 @@ namespace Cart.WebAPI.Controllers
         }
 
         [HttpPut]
-        [UnitOfWork(typeof(CartDbContext))]
+        //[UnitOfWork(typeof(CartDbContext))]
         public async Task<ActionResult<ServiceResponse<bool>>> UpdateQuantity(CartItem cartItem)
         {
             var result = await _cartDomainService.UpdateQuantity(cartItem, UserId());
@@ -63,7 +63,7 @@ namespace Cart.WebAPI.Controllers
         }
 
         [HttpDelete("{productId}/{productTypeId}")]
-        [UnitOfWork(typeof(CartDbContext))]
+        //[UnitOfWork(typeof(CartDbContext))]
         public async Task<ActionResult<ServiceResponse<bool>>> RemoveCartItem(Guid productId, Guid productTypeId)
         {
             var result = await _cartRepository.RemoveItemFromCart(productId, productTypeId, UserId());
