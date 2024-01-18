@@ -1,5 +1,8 @@
 using Common.Alipay;
 using Common.Jwt;
+using Common.RabbitMQ;
+using Microsoft.AspNetCore.Mvc;
+using Payment.WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +23,26 @@ builder.Services.AddJwtAuthentication(JwtConfig.Get<JwtSetting>());
 //读取配置文件中Alipay的内容
 var AlipayConfig = builder.Configuration.GetSection("Alipay");
 builder.Services.AddAlipay(AlipayConfig.Get<AlipaySetting>());
+
+// 注入分布式缓存
+builder.Services.AddStackExchangeRedisCache(opt =>
+{
+    opt.Configuration = "43.143.170.48";
+    opt.InstanceName = "joker_";
+});
+
+
+//注入过滤器
+builder.Services.Configure<MvcOptions>(opt =>
+{
+    opt.Filters.Add<PaymentJwtVersionCheckFilter>();
+});
+
+//注入RabbitMQ
+builder.Services.AddRabbitMQ();
+
+//注入自定义服务
+builder.Services.AddScoped<IRabbitMqService, RabbitMqService>();
 
 
 builder.Services.AddCors(opt =>
