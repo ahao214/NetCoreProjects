@@ -1,7 +1,9 @@
+using Cart.Infrastructure.DbContexts;
 using Cart.WebAPI;
 using Common.Jwt;
 using Common.RabbitMQ;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,10 +32,10 @@ builder.Services.Configure<MvcOptions>(opt =>
 });
 
 // 注入DbContext
-//builder.Services.AddDbContext<UserDbContext>(opt =>
-//{
-//    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-//});
+builder.Services.AddDbContext<CartDbContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 // 自定义服务
 builder.Services.AddScoped<IRabbitMqService, RabbitMqService>();
