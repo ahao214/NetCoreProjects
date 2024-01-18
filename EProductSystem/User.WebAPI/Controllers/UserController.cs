@@ -37,6 +37,15 @@ namespace User.WebAPI.Controllers
                 resp.Message = "手机号已存在";
                 return BadRequest(resp);
             }
+
+            string code = await _userRepository.FindPhoneNumberCodeAsync(req.phone);
+            if (code == null || code.Equals(""))
+            {
+                resp.Success = false;
+                resp.Message = "请先获取验证码";
+                return BadRequest(resp);
+            }
+
             var user = new User.Domain.Entity.User(req.phone, req.name);
             user.ChangePassword(req.password);
             _dbContext.Users.Add(user);
