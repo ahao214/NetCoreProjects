@@ -10,6 +10,7 @@ using User.WebAPI.Controllers.Request;
 using User.Infrastructure.DbContexts;
 using System.Security.Claims;
 using Tea.Utils;
+using Common.RabbitMQ;
 
 namespace User.WebAPI.Controllers
 {
@@ -21,13 +22,15 @@ namespace User.WebAPI.Controllers
         private readonly ITokenService _tokenService;
         private readonly IUserRepository _userRepository;
         private readonly IOptionsSnapshot<JwtSetting> _options;
+        private readonly IRabbitMqService _rabbitMqService;
 
-        public LoginController(UserDomainService userDomainService,ITokenService tokenService,IUserRepository userRepository,IOptionsSnapshot<JwtSetting> options)
+        public LoginController(UserDomainService userDomainService,ITokenService tokenService,IUserRepository userRepository,IOptionsSnapshot<JwtSetting> options,IRabbitMqService rabbitMqService)
         {
             _userDomainService = userDomainService;
             _tokenService = tokenService;
             _userRepository = userRepository;
             _options = options;
+            _rabbitMqService = rabbitMqService;
         }
 
         [HttpPost]
@@ -67,7 +70,7 @@ namespace User.WebAPI.Controllers
                     string jwt = _tokenService.BuildToken(claims, _options.Value);
                     resp.Data = jwt;
 
-                    //await _rabbitMqService.PublishMessage("ycode_shop", isExist.Id.ToString(), isExist.JwtVersion.ToString(), "");
+                    await _rabbitMqService.PublishMessage("joker_shop", isExist.Id.ToString(), isExist.JwtVersion.ToString(), "");
 
                     return Ok(resp);
                 case UserAccessResult.PhoneNumberNotFound:
@@ -118,7 +121,7 @@ namespace User.WebAPI.Controllers
                     string jwt = _tokenService.BuildToken(claims, _options.Value);
                     resp.Data = jwt;
 
-                    //await _rabbitMqService.PublishMessage("ycode_shop", isExist.Id.ToString(), isExist.JwtVersion.ToString(), "");
+                    await _rabbitMqService.PublishMessage("joker_shop", isExist.Id.ToString(), isExist.JwtVersion.ToString(), "");
 
                     return Ok(resp);
                 case CheckCodeResult.PhoneNumberNotFound:
@@ -151,7 +154,7 @@ namespace User.WebAPI.Controllers
 
             _userDomainService.UpdateJwtVersion(isExist);
 
-            //await _rabbitMqService.PublishMessage("ycode_shop", isExist.Id.ToString(), isExist.JwtVersion.ToString(), "");
+            await _rabbitMqService.PublishMessage("joker_shop", isExist.Id.ToString(), isExist.JwtVersion.ToString(), "");
 
             resp.Message = "登出成功";
 

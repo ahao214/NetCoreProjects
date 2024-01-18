@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using User.WebAPI;
 using Common.Jwt;
+using Common.RabbitMQ;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,9 @@ builder.Services.AddSwaggerGen(opt =>
 var JwtConfig = builder.Configuration.GetSection("Jwt");
 builder.Services.AddJwtAuthentication(JwtConfig.Get<JwtSetting>());
 builder.Services.Configure<JwtSetting>(JwtConfig);
+
+// ×¢ÈëRabbitMQ
+builder.Services.AddRabbitMQ();
 
 
 // ×¢ÈëDbContext
@@ -59,6 +63,10 @@ builder.Services.AddScoped<UserDomainService>();
 builder.Services.AddScoped<ISmsCodeSender, SmsCodeSender>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IRabbitMqService, RabbitMqService>();
+
+
+
 
 
 var app = builder.Build();
