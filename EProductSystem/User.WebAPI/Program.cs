@@ -65,7 +65,15 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IRabbitMqService, RabbitMqService>();
 
-
+// øÁ”Ú
+builder.Services.AddCors(opt =>
+{
+    opt.AddDefaultPolicy(bui =>
+    {
+        bui.WithOrigins(new string[] { "http://localhost:8080" })
+        .AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+    });
+});
 
 
 
@@ -78,8 +86,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// øÁ”Ú
+app.UseCors();
+
 app.UseHttpsRedirection();
 
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

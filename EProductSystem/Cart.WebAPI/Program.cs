@@ -41,7 +41,15 @@ builder.Services.AddStackExchangeRedisCache(opt =>
     opt.InstanceName = "shop_";
 });
 
-
+// ¿çÓò
+builder.Services.AddCors(opt =>
+{
+    opt.AddDefaultPolicy(bui =>
+    {
+        bui.WithOrigins(new string[] { "http://localhost:8080" })
+        .AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+    });
+});
 
 
 
@@ -54,8 +62,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
+
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
