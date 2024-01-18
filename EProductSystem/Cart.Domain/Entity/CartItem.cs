@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Cart.Domain.Entity
+﻿namespace Cart.Domain.Entity
 {
     public class CartItem
     {

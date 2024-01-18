@@ -8,7 +8,6 @@ namespace Cart.Infrastructure.DbContexts
     {
         public CartDbContext(DbContextOptions options) : base(options)
         {
-
         }
 
         public DbSet<CartItem> CartItems { get; set; }
@@ -19,6 +18,5 @@ namespace Cart.Infrastructure.DbContexts
 
             modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
         }
-
     }
 }

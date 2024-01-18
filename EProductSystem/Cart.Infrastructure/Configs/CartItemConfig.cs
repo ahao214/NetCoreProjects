@@ -11,7 +11,6 @@ namespace Cart.Infrastructure.Configs
             builder.ToTable($"T_{nameof(CartItem)}");
 
             builder.HasKey(x => new { x.ProductId, x.ProductTypeId, x.UserId });
-
         }
     }
 }

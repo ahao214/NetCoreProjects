@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cart.Domain
 {
-    public class CartDomainService:ICartRepository
+    public class CartDomainService
     {
 
     }
