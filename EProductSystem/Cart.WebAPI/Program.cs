@@ -28,9 +28,11 @@ builder.Services.AddJwtAuthentication(JwtConfig.Get<JwtSetting>());
 // 注入RabbitMQ
 builder.Services.AddRabbitMQ();
 
+// 注入过滤器
 builder.Services.Configure<MvcOptions>(opt =>
 {
     opt.Filters.Add<CartJwtVersionCheckFilter>();
+    opt.Filters.Add<UnitOfWorkFilter>();
 });
 
 // 注入DbContext
