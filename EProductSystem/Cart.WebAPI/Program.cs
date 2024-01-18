@@ -1,3 +1,5 @@
+using Cart.Domain;
+using Cart.Infrastructure;
 using Cart.Infrastructure.DbContexts;
 using Cart.WebAPI;
 using Common.Jwt;
@@ -39,6 +41,7 @@ builder.Services.AddDbContext<CartDbContext>(opt =>
 
 // 自定义服务
 builder.Services.AddScoped<IRabbitMqService, RabbitMqService>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
 
 // 注入Redis
 builder.Services.AddStackExchangeRedisCache(opt =>
