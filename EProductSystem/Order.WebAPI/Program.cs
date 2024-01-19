@@ -4,6 +4,7 @@ using Order.Infrastructure.DbContexts;
 using Common.Jwt;
 using Common.RabbitMQ;
 using Microsoft.AspNetCore.Mvc;
+using Order.WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,11 +22,12 @@ builder.Services.AddSwaggerGen(opt =>
 
 
 //注入过滤器
-//builder.Services.Configure<MvcOptions>(opt =>
-//{
-//    opt.Filters.Add<UnitOfWorkFilter>();
-//    opt.Filters.Add<OrderJwtVersionCheckFilter>();
-//});
+builder.Services.Configure<MvcOptions>(opt =>
+{
+    opt.Filters.Add<UnitOfWorkFilter>();
+    opt.Filters.Add<OrderJwtVersionCheckFilter>();
+});
+
 
 //注入分布式缓存
 builder.Services.AddStackExchangeRedisCache(opt =>
@@ -41,6 +43,7 @@ builder.Services.AddDbContext<OrderDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+
 //注入Jwt服务
 var JwtConfig = builder.Configuration.GetSection("Jwt");
 builder.Services.AddJwtAuthentication(JwtConfig.Get<JwtSetting>());
@@ -49,6 +52,7 @@ builder.Services.AddJwtAuthentication(JwtConfig.Get<JwtSetting>());
 builder.Services.AddRabbitMQ();
 
 //注入自定义服务
+builder.Services.AddScoped<IRabbitMqService, RabbitMqService>();
 
 // 跨域
 builder.Services.AddCors(opt =>
