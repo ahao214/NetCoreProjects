@@ -5,6 +5,8 @@ using Common.Jwt;
 using Common.RabbitMQ;
 using Microsoft.AspNetCore.Mvc;
 using Order.WebAPI;
+using Order.Domain;
+using Order.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,6 +54,8 @@ builder.Services.AddJwtAuthentication(JwtConfig.Get<JwtSetting>());
 builder.Services.AddRabbitMQ();
 
 //注入自定义服务
+builder.Services.AddScoped<OrderDomainService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IRabbitMqService, RabbitMqService>();
 
 // 跨域
