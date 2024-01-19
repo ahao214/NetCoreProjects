@@ -23,5 +23,7 @@ namespace Product.Domain
         /// <param name="ProductId"></param>
         /// <returns></returns>
         Task<List<ProductType>> GetProductTypeByProductIdAsync(Guid ProductId);
+
+        Task<string> GetTypeNameByProductTypeId(Guid productTypeId);
     }
 }
